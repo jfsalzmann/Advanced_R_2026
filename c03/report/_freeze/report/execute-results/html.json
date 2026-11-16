@@ -1,0 +1,15 @@
+{
+  "hash": "97770610fa9f8436667488693ef5e550",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Karlsruhe Is Getting Warmer\"\nsubtitle: \"A short climate report from 150 years of daily weather data\"\nauthor: \"Your Name\"\ndate: today\n---\n\n\n::: {.cell}\n\n:::\n\n\n\n::: {.cell cache.extra='\"2026-11-15 23:43:38\"'}\n\n:::\n\n\n\n::: {.cell}\n\n:::\n\n\n## Introduction\n\nKarlsruhe is one of the warmest cities in Germany. This report uses daily observations of the\nDeutscher Wetterdienst [@dwd2026] to show how its climate changed since 1876. All analyses were\ndone in R with the tidyverse [@wickham2023].\n\n## Data\n\nTwo stations: Karlsruhe (1876–2008) and its successor Rheinstetten (since 2008). Years with\nfewer than 360 observed days are excluded, leaving 148 years.\n\n## Results\n\n### Temperature\n\nThe mean temperature of the last 30 years (1996–2025) is\n**1.2 °C** higher than in the reference period\n1961–1990. The warmest year on record is\n2023. @fig-anomaly shows the deviation of every year from the reference mean,\n@fig-stripes the same data as \"warming stripes\" [@hawkins2018].\n\n\n::: {.cell}\n::: {.cell-output-display}\n![Annual mean temperature in Karlsruhe, deviation from the 1961–1990 mean.](report_files/figure-html/fig-anomaly-1.png){#fig-anomaly width=672}\n:::\n:::\n\n\n![Warming stripes for Karlsruhe, one stripe per year.](images/stripes.png){#fig-stripes width=80%}\n\n### Hot and frost days\n\nA hot day (*heißer Tag*) has a maximum of at least 30 °C, a frost day a minimum below 0 °C.\n@tbl-days compares both periods.\n\n\n::: {#tbl-days .cell tbl-cap='Average number of days per year.'}\n::: {.cell-output-display}\n\n\n|           | 1961–1990| 1996–2025|\n|:----------|---------:|---------:|\n|Hot days   |      23.2|      12.2|\n|Frost days |      62.3|      68.0|\n\n\n:::\n:::\n\n\nHot days went from about 12 to 23 per year.\n\n## Method\n\nThe anomaly of year $t$ is its mean temperature minus the mean of the reference period $R$\n(30 years):\n\n$$\n\\Delta T_t = \\bar{T}_t - \\frac{1}{30} \\sum_{s \\in R} \\bar{T}_s\n$$\n\n## References\n\n::: {#refs}\n:::\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
