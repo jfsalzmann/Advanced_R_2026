@@ -1,0 +1,32 @@
+project:
+  type: website
+  title: "Karlsruhe climate"
+
+website:
+  title: "Karlsruhe climate"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - href: days.qmd
+        text: Hot and frost days
+      - href: explore.qmd
+        text: Explore
+      - href: references.qmd
+        text: References
+
+execute:
+  # Re-run code only when a page's source changed
+  freeze: auto
+  echo: false
+  warning: false
+  message: false
+
+format:
+  html:
+    toc: true
+
+# One shared bibliography: no reference list at the bottom of each page.
+# Citations link to references.qmd themselves: [@key](references.qmd#ref-key)
+bibliography: references.bib
+suppress-bibliography: true

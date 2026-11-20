@@ -1,0 +1,10 @@
+---
+title: "References"
+suppress-bibliography: false
+nocite: "@*"
+---
+
+All sources cited anywhere on this website.
+
+::: {#refs}
+:::

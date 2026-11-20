@@ -1,0 +1,17 @@
+{
+  "hash": "6f8dac0f351a5fbea7344595334da946",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Hot and frost days\"\n---\n\n\n::: {.cell}\n\n:::\n\n\nThe annual mean in the [anomaly figure on the home page](index.qmd#fig-anomaly) hides how the extremes changed.\n@fig-days counts hot and frost days per year, with a smoothed trend, made with ggplot2 as in\n[@wickham2023](references.qmd#ref-wickham2023).\n\n\n::: {.cell}\n::: {.cell-output-display}\n![Hot and frost days per year in Karlsruhe.](days_files/figure-html/fig-days-1.png){#fig-days width=672}\n:::\n:::\n\n\nAs @fig-days shows, frost days became rarer while hot days became more common.\n",
+    "supporting": [
+      "days_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

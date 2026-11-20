@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Explore – Karlsruhe climate</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-2769eccb19f3d6867a8b6e42fa11e4a8.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<link href="site_libs/htmltools-fill-0.5.9/fill.css" rel="stylesheet">
+<script src="site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<script src="site_libs/plotly-binding-4.12.1/plotly.js"></script>
+<script src="site_libs/typedarray-0.1/typedarray.min.js"></script>
+<script src="site_libs/jquery-3.5.1/jquery.min.js"></script>
+<link href="site_libs/crosstalk-1.2.2/css/crosstalk.min.css" rel="stylesheet">
+<script src="site_libs/crosstalk-1.2.2/js/crosstalk.min.js"></script>
+<link href="site_libs/plotly-htmlwidgets-css-2.25.2/plotly-htmlwidgets.css" rel="stylesheet">
+<script src="site_libs/plotly-main-2.25.2/plotly-latest.min.js"></script>
+
+
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">Karlsruhe climate</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./days.html"> 
+<span class="menu-text">Hot and frost days</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="./explore.html" aria-current="page"> 
+<span class="menu-text">Explore</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./references.html"> 
+<span class="menu-text">References</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Explore</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p><a href="#fig-explore" class="quarto-xref">Figure&nbsp;1</a> is interactive: hover over a line to see its year, double-click a year in the legend to show only that one. Data: <a href="./references.html#ref-dwd2026"><span class="citation" data-cites="dwd2026">Deutscher Wetterdienst (2026)</span></a>.</p>
+<div class="cell">
+<div id="fig-explore" class="cell-output-display quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-explore-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="plotly html-widget html-fill-item" id="htmlwidget-2d30fbab2d6c4e7a4ed3" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-2d30fbab2d6c4e7a4ed3">{"x":{"data":[{"x":[1,2,3,4,5,6,7,8,9,10,11,12],"y":[3.2967741935483872,7.7428571428571429,9.17741935483871,9.6333333333333329,17.061290322580646,17.039999999999999,20.012903225806451,21.248387096774195,14.126666666666667,11.848387096774193,5.666666666666667,1.8290322580645162],"text":["month:  1<br />temp_mean:  3.2967742<br />year: 1990<br />year: 1990","month:  2<br />temp_mean:  7.7428571<br />year: 1990<br />year: 1990","month:  3<br />temp_mean:  9.1774194<br />year: 1990<br />year: 1990","month:  4<br />temp_mean:  9.6333333<br />year: 1990<br />year: 1990","month:  5<br />temp_mean: 17.0612903<br />year: 1990<br />year: 1990","month:  6<br />temp_mean: 17.0400000<br />year: 1990<br />year: 1990","month:  7<br />temp_mean: 20.0129032<br />year: 1990<br />year: 1990","month:  8<br />temp_mean: 21.2483871<br />year: 1990<br />year: 1990","month:  9<br />temp_mean: 14.1266667<br />year: 1990<br />year: 1990","month: 10<br />temp_mean: 11.8483871<br />year: 1990<br />year: 1990","month: 11<br />temp_mean:  5.6666667<br />year: 1990<br />year: 1990","month: 12<br />temp_mean:  1.8290323<br />year: 1990<br />year: 1990"],"type":"scatter","mode":"lines","line":{"width":1.8897637795275593,"color":"rgba(68,1,84,1)","dash":"solid"},"hoveron":"points","name":"1990","legendgroup":"1990","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1,2,3,4,5,6,7,8,9,10,11,12],"y":[2.9774193548387098,-0.47857142857142859,8.8322580645161288,9.6799999999999997,12.32258064516129,16.553333333333335,22.56774193548387,22.012903225806451,17.760000000000002,9.8419354838709676,5.0700000000000003,1.1000000000000001],"text":["month:  1<br />temp_mean:  2.9774194<br />year: 1991<br />year: 1991","month:  2<br />temp_mean: -0.4785714<br />year: 1991<br />year: 1991","month:  3<br />temp_mean:  8.8322581<br />year: 1991<br />year: 1991","month:  4<br />temp_mean:  9.6800000<br />year: 1991<br />year: 1991","month:  5<br />temp_mean: 12.3225806<br />year: 1991<br />year: 1991","month:  6<br />temp_mean: 16.5533333<br />year: 1991<br />year: 1991","month:  7<br />temp_mean: 22.5677419<br />year: 1991<br />year: 1991","month:  8<br />temp_mean: 22.0129032<br />year: 1991<br />year: 1991","month:  9<br />temp_mean: 17.7600000<br />year: 1991<br />year: 1991","month: 10<br />temp_mean:  9.8419355<br />year: 1991<br />year: 1991","month: 11<br />temp_mean:  5.0700000<br />year: 1991<br />year: 1991","month: 12<br />temp_mean:  1.1000000<br />year: 1991<br />year: 1991"],"type":"scatter","mode":"lines","line":{"width":1.8897637795275593,"color":"rgba(70,12,95,1)","dash":"solid"},"hoveron":"points","name":"1991","legendgroup":"1991","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1,2,3,4,5,6,7,8,9,10,11,12],"y":[1.8096774193548386,3.796551724137931,7.4290322580645158,10.536666666666667,16.935483870967744,18.283333333333335,21.164516129032258,22.419354838709676,15.886666666666667,8.5580645161290327,7.5566666666666666,2.6096774193548389],"text":["month:  1<br />temp_mean:  1.8096774<br />year: 1992<br />year: 1992","month:  2<br />temp_mean:  3.7965517<br />year: 1992<br />year: 1992","month:  3<br />temp_mean:  7.4290323<br />year: 1992<br />year: 1992","month:  4<br />temp_mean: 10.5366667<br />year: 1992<br />year: 1992","month:  5<br />temp_mean: 16.9354839<br />year: 1992<br />year: 1992","month:  6<br />temp_mean: 18.2833333<br />year: 1992<br />year: 1992","month:  7<br />temp_mean: 21.1645161<br />year: 1992<br />year: 1992","month:  8<br />temp_mean: 22.4193548<br />year: 1992<br />year: 1992","month:  9<br />temp_mean: 15.8866667<br />year: 1992<br />year: 1992","month: 10<br />temp_mean:  8.5580645<br />year: 1992<br />year: 1992","month: 11<br />temp_mean:  7.5566667<br />year: 1992<br />year: 1992","month: 12<br />temp_mean:  2.6096774<br />year: 1992<br />year: 1992"],"type":"scatter","mode":"lines","line":{"width":1.8897637795275593,"color":"rgba(72,23,105,1)","dash":"solid"},"hoveron":"points","name":"1992","legendgroup":"1992","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1,2,3,4,5,6,7,8,9,10,11,12],"y":[4.9806451612903224,0.875,6.6322580645161286,12.933333333333334,16.519354838709678,18.690000000000001,18.990322580645163,19.467741935483872,14.396666666666667,9.2548387096774185,2.2566666666666668,5.6322580645161286],"text":["month:  1<br />temp_mean:  4.9806452<br />year: 1993<br />year: 1993","month:  2<br />temp_mean:  0.8750000<br />year: 1993<br />year: 1993","month:  3<br />temp_mean:  6.6322581<br />year: 1993<br />year: 1993","month:  4<br />temp_mean: 12.9333333<br />year: 1993<br />year: 1993","month:  5<br />temp_mean: 16.5193548<br />year: 1993<br />year: 1993","month:  6<br />temp_mean: 18.6900000<br />year: 1993<br />year: 1993","month:  7<br />temp_mean: 18.9903226<br />year: 1993<br />year: 1993","month:  8<br />temp_mean: 19.4677419<br />year: 1993<br />year: 1993","month:  9<br />temp_mean: 14.3966667<br />year: 1993<br />year: 1993","month: 10<br />temp_mean:  9.2548387<br />year: 1993<br />year: 1993","month: 11<br />temp_mean:  2.2566667<br />year: 1993<br />year: 1993","month: 12<br />temp_mean:  5.6322581<br />year: 1993<br />year: 1993"],"type":"scatter","mode":"lines","line":{"width":1.8897637795275593,"color":"rgba(72,32,113,1)","dash":"solid"},"hoveron":"points","name":"1993","legendgroup":"1993","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1,2,3,4,5,6,7,8,9,10,11,12],"y":[4.4612903225806448,2.9464285714285716,9.5935483870967744,9.7699999999999996,14.941935483870967,19.093333333333334,24.103225806451611,20.325806451612902,15.4,9.7870967741935484,9.3933333333333326,5.7709677419354843],"text":["month:  1<br />temp_mean:  4.4612903<br />year: 1994<br />year: 1994","month:  2<br />temp_mean:  2.9464286<br />year: 1994<br />year: 1994","month:  3<br />temp_mean:  9.5935484<br />year: 1994<br />year: 1994","month:  4<br />temp_mean:  9.7700000<br />year: 1994<br />year: 1994","month:  5<br />temp_mean: 14.9419355<br />year: 1994<br />year: 1994","month:  6<br />temp_mean: 19.0933333<br />year: 1994<br />year: 1994","month:  7<br />temp_mean: 24.1032258<br />year: 1994<br />year: 1994","month:  8<br />temp_mean: 20.3258065<br />year: 1994<br />year: 1994","month:  9<br />temp_mean: 15.4000000<br />year: 1994<br />year: 1994","month: 10<br />temp_mean:  9.7870968<br />year: 1994<br />year: 1994","month: 11<br />temp_mean:  9.3933333<br />year: 1994<br />year: 1994","month: 12<br />temp_mean:  5.7709677<br />year: 1994<br />year: 1994"],"type":"scatter","mode":"lines","line":{"width":1.8897637795275593,"color":"rgba(72,41,121,1)","dash":"solid"},"hoveron":"points","name":"1994","legendgroup":"1994","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1,2,3,4,5,6,7,8,9,10,11,12],"y":[2.2903225806451615,7.2964285714285717,5.6709677419354838,11.24,14.906451612903226,16.75,22.887096774193548,20.374193548387098,14.096666666666668,13.441935483870967,4.79,1.1354838709677419],"text":["month:  1<br />temp_mean:  2.2903226<br />year: 1995<br />year: 1995","month:  2<br />temp_mean:  7.2964286<br />year: 1995<br />year: 1995","month:  3<br />temp_mean:  5.6709677<br />year: 1995<br />year: 1995","month:  4<br />temp_mean: 11.2400000<br />year: 1995<br />year: 1995","month:  5<br />temp_mean: 14.9064516<br />year: 1995<br />year: 1995","month:  6<br />temp_mean: 16.7500000<br />year: 1995<br />year: 1995","month:  7<br />temp_mean: 22.8870968<br />year: 1995<br />year: 1995","month:  8<br />temp_mean: 20.3741935<br />year: 1995<br />year: 1995","month:  9<br />temp_mean: 14.0966667<br />year: 1995<br />year: 1995","month: 10<br />temp_mean: 13.4419355<br />year: 1995<br />year: 1995","month: 11<br />temp_mean:  4.7900000<br />year: 1995<br />year: 1995","month: 12<br />temp_mean:  1.1354839<br />year: 1995<br />year: 1995"],"type":"scatter","mode":"lines","line":{"width":1.8897637795275593,"color":"rgba(70,51,126,1)","dash":"solid"},"hoveron":"points","name":"1995","legendgroup":"1995","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1,2,3,4,5,6,7,8,9,10,11,12],"y":[0.10645161290322581,0.96896551724137936,4.3741935483870966,10.973333333333333,13.387096774193548,18.359999999999999,18.906451612903226,19.512903225806451,12.683333333333334,11.03225806451613,6.3233333333333333,-0.32903225806451603],"text":["month:  1<br />temp_mean:  0.1064516<br />year: 1996<br />year: 1996","month:  2<br />temp_mean:  0.9689655<br />year: 1996<br />year: 1996","month:  3<br />temp_mean:  4.3741935<br />year: 1996<br />year: 1996","month:  4<br />temp_mean: 10.9733333<br />year: 1996<br />year: 1996","month:  5<br />temp_mean: 13.3870968<br />year: 1996<br />year: 1996","month:  6<br />temp_mean: 18.3600000<br />year: 1996<br />year: 1996","month:  7<br />temp_mean: 18.9064516<br />year: 1996<br />year: 1996","month:  8<br />temp_mean: 19.5129032<br />year: 1996<br />year: 1996","month:  9<br />temp_mean: 12.6833333<br />year: 1996<br />year: 1996","month: 10<br />temp_mean: 11.0322581<br />year: 1996<br />year: 1996","month: 11<br />temp_mean:  6.3233333<br />year: 1996<br />year: 1996","month: 12<br />temp_mean: -0.3290323<br />year: 1996<br />year: 1996"],"type":"scatter","mode":"lines","line":{"width":1.8897637795275593,"color":"rgba(68,59,132,1)","dash":"solid"},"hoveron":"points","name":"1996","legendgroup":"1996","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1,2,3,4,5,6,7,8,9,10,11,12],"y":[-2.0870967741935482,6.0499999999999998,8.8354838709677423,9.5099999999999998,15.319354838709677,17.726666666666667,19.241935483870968,22.219354838709677,16.346666666666668,9.7193548387096769,5.8366666666666669,3.8935483870967742],"text":["month:  1<br />temp_mean: -2.0870968<br />year: 1997<br />year: 1997","month:  2<br />temp_mean:  6.0500000<br />year: 1997<br />year: 1997","month:  3<br />temp_mean:  8.8354839<br />year: 1997<br />year: 1997","month:  4<br />temp_mean:  9.5100000<br />year: 1997<br />year: 1997","month:  5<br />temp_mean: 15.3193548<br />year: 1997<br />year: 1997","month:  6<br />temp_mean: 17.7266667<br />year: 1997<br />year: 1997","month:  7<br />temp_mean: 19.2419355<br />year: 1997<br />year: 1997","month:  8<br />temp_mean: 22.2193548<br />year: 1997<br />year: 1997","month:  9<br />temp_mean: 16.3466667<br />year: 1997<br />year: 1997","month: 10<br />temp_mean:  9.7193548<br />year: 1997<br />year: 1997","month: 11<br />temp_mean:  5.8366667<br />year: 1997<br />year: 1997","month: 12<br />temp_mean:  3.8935484<br />year: 1997<br />year: 1997"],"type":"scatter","mode":"lines","line":{"width":1.8897637795275593,"color":"rgba(65,68,135,1)","dash":"solid"},"hoveron":"points","name":"1997","legendgroup":"1997","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1,2,3,4,5,6,7,8,9,10,11,12],"y":[3.7225806451612904,5.1928571428571431,7.790322580645161,10.656666666666666,16.670967741935485,19.043333333333333,19.154838709677421,20.341935483870969,15.356666666666667,11.006451612903225,3.4966666666666666,3.2032258064516128],"text":["month:  1<br />temp_mean:  3.7225806<br />year: 1998<br />year: 1998","month:  2<br />temp_mean:  5.1928571<br />year: 1998<br />year: 1998","month:  3<br />temp_mean:  7.7903226<br />year: 1998<br />year: 1998","month:  4<br />temp_mean: 10.6566667<br />year: 1998<br />year: 1998","month:  5<br />temp_mean: 16.6709677<br />year: 1998<br />year: 1998","month:  6<br />temp_mean: 19.0433333<br />year: 1998<br />year: 1998","month:  7<br />temp_mean: 19.1548387<br />year: 1998<br />year: 1998","month:  8<br />temp_mean: 20.3419355<br />year: 1998<br />year: 1998","month:  9<br />temp_mean: 15.3566667<br />year: 1998<br />year: 1998","month: 10<br />temp_mean: 11.0064516<br />year: 1998<br />year: 1998","month: 11<br />temp_mean:  3.4966667<br />year: 1998<br />year: 1998","month: 12<br />temp_mean:  3.2032258<br />year: 1998<br />year: 1998"],"type":"scatter","mode":"lines","line":{"width":1.8897637795275593,"color":"rgba(62,76,138,1)","dash":"solid"},"hoveron":"points","name":"1998","legendgroup":"1998","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1,2,3,4,5,6,7,8,9,10,11,12],"y":[4.4580645161290322,2.0571428571428569,7.67741935483871,11.353333333333333,16.600000000000001,17.983333333333334,21.696774193548386,19.916129032258066,18.846666666666668,10.480645161290322,4.6133333333333333,3.5612903225806449],"text":["month:  1<br />temp_mean:  4.4580645<br />year: 1999<br />year: 1999","month:  2<br />temp_mean:  2.0571429<br />year: 1999<br />year: 1999","month:  3<br />temp_mean:  7.6774194<br />year: 1999<br />year: 1999","month:  4<br />temp_mean: 11.3533333<br />year: 1999<br />year: 1999","month:  5<br />temp_mean: 16.6000000<br />year: 1999<br />year: 1999","month:  6<br />temp_mean: 17.9833333<br />year: 1999<br />year: 1999","month:  7<br />temp_mean: 21.6967742<br />year: 1999<br />year: 1999","month:  8<br />temp_mean: 19.9161290<br />year: 1999<br />year: 1999","month:  9<br />temp_mean: 18.8466667<br />year: 1999<br />year: 1999","month: 10<br />temp_mean: 10.4806452<br />year: 1999<br />year: 1999","month: 11<br />temp_mean:  4.6133333<br />year: 1999<br />year: 1999","month: 12<br />temp_mean:  3.5612903<br />year: 1999<br />year: 1999"],"type":"scatter","mode":"lines","line":{"width":1.8897637795275593,"color":"rgba(58,84,140,1)","dash":"solid"},"hoveron":"points","name":"1999","legendgroup":"1999","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1,2,3,4,5,6,7,8,9,10,11,12],"y":[3.0193548387096776,6.1448275862068966,7.7516129032258068,12.226666666666667,16.816129032258065,20.176666666666666,17.822580645161292,20.787096774193547,16.203333333333333,12.19032258064516,7.7000000000000002,5.209677419354839],"text":["month:  1<br />temp_mean:  3.0193548<br />year: 2000<br />year: 2000","month:  2<br />temp_mean:  6.1448276<br />year: 2000<br />year: 2000","month:  3<br />temp_mean:  7.7516129<br />year: 2000<br />year: 2000","month:  4<br />temp_mean: 12.2266667<br />year: 2000<br />year: 2000","month:  5<br />temp_mean: 16.8161290<br />year: 2000<br />year: 2000","month:  6<br />temp_mean: 20.1766667<br />year: 2000<br />year: 2000","month:  7<br />temp_mean: 17.8225806<br />year: 2000<br />year: 2000","month:  8<br />temp_mean: 20.7870968<br />year: 2000<br />year: 2000","month:  9<br />temp_mean: 16.2033333<br />year: 2000<br />year: 2000","month: 10<br />temp_mean: 12.1903226<br />year: 2000<br />year: 2000","month: 11<br />temp_mean:  7.7000000<br />year: 2000<br />year: 2000","month: 12<br />temp_mean:  5.2096774<br />year: 2000<br />year: 2000"],"type":"scatter","mode":"lines","line":{"width":1.8897637795275593,"color":"rgba(54,92,141,1)","dash":"solid"},"hoveron":"points","name":"2000","legendgroup":"2000","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1,2,3,4,5,6,7,8,9,10,11,12],"y":[3.3967741935483868,5.1964285714285712,7.9806451612903224,9.0533333333333328,17.248387096774195,16.856666666666666,21.170967741935485,21.241935483870968,13.293333333333333,14.348387096774193,4.4433333333333334,1.3580645161290321],"text":["month:  1<br />temp_mean:  3.3967742<br />year: 2001<br />year: 2001","month:  2<br />temp_mean:  5.1964286<br />year: 2001<br />year: 2001","month:  3<br />temp_mean:  7.9806452<br />year: 2001<br />year: 2001","month:  4<br />temp_mean:  9.0533333<br />year: 2001<br />year: 2001","month:  5<br />temp_mean: 17.2483871<br />year: 2001<br />year: 2001","month:  6<br />temp_mean: 16.8566667<br />year: 2001<br />year: 2001","month:  7<br />temp_mean: 21.1709677<br />year: 2001<br />year: 2001","month:  8<br />temp_mean: 21.2419355<br />year: 2001<br />year: 2001","month:  9<br />temp_mean: 13.2933333<br />year: 2001<br />year: 2001","month: 10<br />temp_mean: 14.3483871<br />year: 2001<br />year: 2001","month: 11<br />temp_mean:  4.4433333<br />year: 2001<br />year: 2001","month: 12<br />temp_mean:  1.3580645<br />year: 2001<br />year: 2001"],"type":"scatter","mode":"lines","line":{"width":1.8897637795275593,"color":"rgba(51,99,141,1)","dash":"solid"},"hoveron":"points","name":"2001","legendgroup":"2001","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1,2,3,4,5,6,7,8,9,10,11,12],"y":[1.1580645161290322,7.1928571428571431,7.8483870967741938,10.623333333333333,14.903225806451612,20.423333333333332,19.677419354838708,19.983870967741936,14.746666666666666,11.106451612903225,8.293333333333333,4.5096774193548388],"text":["month:  1<br />temp_mean:  1.1580645<br />year: 2002<br />year: 2002","month:  2<br />temp_mean:  7.1928571<br />year: 2002<br />year: 2002","month:  3<br />temp_mean:  7.8483871<br />year: 2002<br />year: 2002","month:  4<br />temp_mean: 10.6233333<br />year: 2002<br />year: 2002","month:  5<br />temp_mean: 14.9032258<br />year: 2002<br />year: 2002","month:  6<br />temp_mean: 20.4233333<br />year: 2002<br />year: 2002","month:  7<br />temp_mean: 19.6774194<br />year: 2002<br />year: 2002","month:  8<br />temp_mean: 19.9838710<br />year: 2002<br />year: 2002","month:  9<br />temp_mean: 14.7466667<br />year: 2002<br />year: 2002","month: 10<br />temp_mean: 11.1064516<br />year: 2002<br />year: 2002","month: 11<br />temp_mean:  8.2933333<br />year: 2002<br />year: 2002","month: 12<br />temp_mean:  4.5096774<br />year: 2002<br />year: 2002"],"type":"scatter","mode":"lines","line":{"width":1.8897637795275593,"color":"rgba(48,106,142,1)","dash":"solid"},"hoveron":"points","name":"2002","legendgroup":"2002","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1,2,3,4,5,6,7,8,9,10,11,12],"y":[0.96129032258064528,0.84285714285714286,8.8548387096774199,11.126666666666667,16.235483870967741,23.030000000000001,21.729032258064517,24.332258064516129,16.306666666666668,8.3806451612903228,7.25,3.0838709677419356],"text":["month:  1<br />temp_mean:  0.9612903<br />year: 2003<br />year: 2003","month:  2<br />temp_mean:  0.8428571<br />year: 2003<br />year: 2003","month:  3<br />temp_mean:  8.8548387<br />year: 2003<br />year: 2003","month:  4<br />temp_mean: 11.1266667<br />year: 2003<br />year: 2003","month:  5<br />temp_mean: 16.2354839<br />year: 2003<br />year: 2003","month:  6<br />temp_mean: 23.0300000<br />year: 2003<br />year: 2003","month:  7<br />temp_mean: 21.7290323<br />year: 2003<br />year: 2003","month:  8<br />temp_mean: 24.3322581<br />year: 2003<br />year: 2003","month:  9<br />temp_mean: 16.3066667<br />year: 2003<br />year: 2003","month: 10<br />temp_mean:  8.3806452<br />year: 2003<br />year: 2003","month: 11<br />temp_mean:  7.2500000<br />year: 2003<br />year: 2003","month: 12<br />temp_mean:  3.0838710<br />year: 2003<br />year: 2003"],"type":"scatter","mode":"lines","line":{"width":1.8897637795275593,"color":"rgba(44,113,142,1)","dash":"solid"},"hoveron":"points","name":"2003","legendgroup":"2003","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1,2,3,4,5,6,7,8,9,10,11,12],"y":[2.2677419354838708,4.4827586206896548,6.2870967741935484,11.640000000000001,13.82258064516129,18.316666666666666,20.07741935483871,20.845161290322579,16.48,11.96774193548387,5.793333333333333,1.596774193548387],"text":["month:  1<br />temp_mean:  2.2677419<br />year: 2004<br />year: 2004","month:  2<br />temp_mean:  4.4827586<br />year: 2004<br />year: 2004","month:  3<br />temp_mean:  6.2870968<br />year: 2004<br />year: 2004","month:  4<br />temp_mean: 11.6400000<br />year: 2004<br />year: 2004","month:  5<br />temp_mean: 13.8225806<br />year: 2004<br />year: 2004","month:  6<br />temp_mean: 18.3166667<br />year: 2004<br />year: 2004","month:  7<br />temp_mean: 20.0774194<br />year: 2004<br />year: 2004","month:  8<br />temp_mean: 20.8451613<br />year: 2004<br />year: 2004","month:  9<br />temp_mean: 16.4800000<br />year: 2004<br />year: 2004","month: 10<br />temp_mean: 11.9677419<br />year: 2004<br />year: 2004","month: 11<br />temp_mean:  5.7933333<br />year: 2004<br />year: 2004","month: 12<br />temp_mean:  1.5967742<br />year: 2004<br />year: 2004"],"type":"scatter","mode":"lines","line":{"width":1.8897637795275593,"color":"rgba(42,120,142,1)","dash":"solid"},"hoveron":"points","name":"2004","legendgroup":"2004","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1,2,3,4,5,6,7,8,9,10,11,12],"y":[3.1677419354838707,0.68571428571428572,6.5935483870967744,11.476666666666667,15.183870967741935,20.239999999999998,20.729032258064517,18.248387096774195,17.623333333333335,12.812903225806451,5.4533333333333331,2.1193548387096772],"text":["month:  1<br />temp_mean:  3.1677419<br />year: 2005<br />year: 2005","month:  2<br />temp_mean:  0.6857143<br />year: 2005<br />year: 2005","month:  3<br />temp_mean:  6.5935484<br />year: 2005<br />year: 2005","month:  4<br />temp_mean: 11.4766667<br />year: 2005<br />year: 2005","month:  5<br />temp_mean: 15.1838710<br />year: 2005<br />year: 2005","month:  6<br />temp_mean: 20.2400000<br />year: 2005<br />year: 2005","month:  7<br />temp_mean: 20.7290323<br />year: 2005<br />year: 2005","month:  8<br />temp_mean: 18.2483871<br />year: 2005<br />year: 2005","month:  9<br />temp_mean: 17.6233333<br />year: 2005<br />year: 2005","month: 10<br />temp_mean: 12.8129032<br />year: 2005<br />year: 2005","month: 11<br />temp_mean:  5.4533333<br />year: 2005<br />year: 2005","month: 12<br />temp_mean:  2.1193548<br />year: 2005<br />year: 2005"],"type":"scatter","mode":"lines","line":{"width":1.8897637795275593,"color":"rgba(39,127,142,1)","dash":"solid"},"hoveron":"points","name":"2005","legendgroup":"2005","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1,2,3,4,5,6,7,8,9,10,11,12],"y":[-1.064516129032258,1.7285714285714286,4.5290322580645164,10.84,15.567741935483872,19.626666666666665,24.754838709677419,17.27741935483871,18.899999999999999,13.819354838709678,8.3499999999999996,4.9548387096774196],"text":["month:  1<br />temp_mean: -1.0645161<br />year: 2006<br />year: 2006","month:  2<br />temp_mean:  1.7285714<br />year: 2006<br />year: 2006","month:  3<br />temp_mean:  4.5290323<br />year: 2006<br />year: 2006","month:  4<br />temp_mean: 10.8400000<br />year: 2006<br />year: 2006","month:  5<br />temp_mean: 15.5677419<br />year: 2006<br />year: 2006","month:  6<br />temp_mean: 19.6266667<br />year: 2006<br />year: 2006","month:  7<br />temp_mean: 24.7548387<br />year: 2006<br />year: 2006","month:  8<br />temp_mean: 17.2774194<br />year: 2006<br />year: 2006","month:  9<br />temp_mean: 18.9000000<br />year: 2006<br />year: 2006","month: 10<br />temp_mean: 13.8193548<br />year: 2006<br />year: 2006","month: 11<br />temp_mean:  8.3500000<br />year: 2006<br />year: 2006","month: 12<br />temp_mean:  4.9548387<br />year: 2006<br />year: 2006"],"type":"scatter","mode":"lines","line":{"width":1.8897637795275593,"color":"rgba(36,134,142,1)","dash":"solid"},"hoveron":"points","name":"2006","legendgroup":"2006","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1,2,3,4,5,6,7,8,9,10,11,12],"y":[6.3322580645161288,6.3928571428571432,7.7129032258064516,14.789999999999999,16.745161290322581,19.526666666666667,19.56774193548387,19.280645161290323,14.336666666666666,10.441935483870967,4.8866666666666667,2.1903225806451614],"text":["month:  1<br />temp_mean:  6.3322581<br />year: 2007<br />year: 2007","month:  2<br />temp_mean:  6.3928571<br />year: 2007<br />year: 2007","month:  3<br />temp_mean:  7.7129032<br />year: 2007<br />year: 2007","month:  4<br />temp_mean: 14.7900000<br />year: 2007<br />year: 2007","month:  5<br />temp_mean: 16.7451613<br />year: 2007<br />year: 2007","month:  6<br />temp_mean: 19.5266667<br />year: 2007<br />year: 2007","month:  7<br />temp_mean: 19.5677419<br />year: 2007<br />year: 2007","month:  8<br />temp_mean: 19.2806452<br />year: 2007<br />year: 2007","month:  9<br />temp_mean: 14.3366667<br />year: 2007<br />year: 2007","month: 10<br />temp_mean: 10.4419355<br />year: 2007<br />year: 2007","month: 11<br />temp_mean:  4.8866667<br />year: 2007<br />year: 2007","month: 12<br />temp_mean:  2.1903226<br />year: 2007<br />year: 2007"],"type":"scatter","mode":"lines","line":{"width":1.8897637795275593,"color":"rgba(34,141,141,1)","dash":"solid"},"hoveron":"points","name":"2007","legendgroup":"2007","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1,2,3,4,5,6,7,8,9,10,11,12],"y":[5.0064516129032262,5.1517241379310343,6.5774193548387094,9.7866666666666671,17.825806451612902,19.48,20.751612903225805,19.706451612903226,14.096666666666668,10.929032258064517,6.1633333333333331,2.129032258064516],"text":["month:  1<br />temp_mean:  5.0064516<br />year: 2008<br />year: 2008","month:  2<br />temp_mean:  5.1517241<br />year: 2008<br />year: 2008","month:  3<br />temp_mean:  6.5774194<br />year: 2008<br />year: 2008","month:  4<br />temp_mean:  9.7866667<br />year: 2008<br />year: 2008","month:  5<br />temp_mean: 17.8258065<br />year: 2008<br />year: 2008","month:  6<br />temp_mean: 19.4800000<br />year: 2008<br />year: 2008","month:  7<br />temp_mean: 20.7516129<br />year: 2008<br />year: 2008","month:  8<br />temp_mean: 19.7064516<br />year: 2008<br />year: 2008","month:  9<br />temp_mean: 14.0966667<br />year: 2008<br />year: 2008","month: 10<br />temp_mean: 10.9290323<br />year: 2008<br />year: 2008","month: 11<br />temp_mean:  6.1633333<br />year: 2008<br />year: 2008","month: 12<br />temp_mean:  2.1290323<br />year: 2008<br />year: 2008"],"type":"scatter","mode":"lines","line":{"width":1.8897637795275593,"color":"rgba(32,147,140,1)","dash":"solid"},"hoveron":"points","name":"2008","legendgroup":"2008","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1,2,3,4,5,6,7,8,9,10,11,12],"y":[-2.0548387096774192,1.9964285714285714,5.8258064516129036,12.84,16.129032258064516,17.616666666666667,19.680645161290322,20.483870967741936,16.113333333333333,10.332258064516129,8.4000000000000004,2.7451612903225806],"text":["month:  1<br />temp_mean: -2.0548387<br />year: 2009<br />year: 2009","month:  2<br />temp_mean:  1.9964286<br />year: 2009<br />year: 2009","month:  3<br />temp_mean:  5.8258065<br />year: 2009<br />year: 2009","month:  4<br />temp_mean: 12.8400000<br />year: 2009<br />year: 2009","month:  5<br />temp_mean: 16.1290323<br />year: 2009<br />year: 2009","month:  6<br />temp_mean: 17.6166667<br />year: 2009<br />year: 2009","month:  7<br />temp_mean: 19.6806452<br />year: 2009<br />year: 2009","month:  8<br />temp_mean: 20.4838710<br />year: 2009<br />year: 2009","month:  9<br />temp_mean: 16.1133333<br />year: 2009<br />year: 2009","month: 10<br />temp_mean: 10.3322581<br />year: 2009<br />year: 2009","month: 11<br />temp_mean:  8.4000000<br />year: 2009<br />year: 2009","month: 12<br />temp_mean:  2.7451613<br />year: 2009<br />year: 2009"],"type":"scatter","mode":"lines","line":{"width":1.8897637795275593,"color":"rgba(31,154,138,1)","dash":"solid"},"hoveron":"points","name":"2009","legendgroup":"2009","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1,2,3,4,5,6,7,8,9,10,11,12],"y":[-0.87419354838709673,2.2999999999999998,5.693548387096774,10.956666666666667,12.419354838709678,18.463333333333335,21.467741935483872,18.306451612903224,13.94,8.9806451612903224,6.9533333333333331,-1.2064516129032259],"text":["month:  1<br />temp_mean: -0.8741935<br />year: 2010<br />year: 2010","month:  2<br />temp_mean:  2.3000000<br />year: 2010<br />year: 2010","month:  3<br />temp_mean:  5.6935484<br />year: 2010<br />year: 2010","month:  4<br />temp_mean: 10.9566667<br />year: 2010<br />year: 2010","month:  5<br />temp_mean: 12.4193548<br />year: 2010<br />year: 2010","month:  6<br />temp_mean: 18.4633333<br />year: 2010<br />year: 2010","month:  7<br />temp_mean: 21.4677419<br />year: 2010<br />year: 2010","month:  8<br />temp_mean: 18.3064516<br />year: 2010<br />year: 2010","month:  9<br />temp_mean: 13.9400000<br />year: 2010<br />year: 2010","month: 10<br />temp_mean:  8.9806452<br />year: 2010<br />year: 2010","month: 11<br />temp_mean:  6.9533333<br />year: 2010<br />year: 2010","month: 12<br />temp_mean: -1.2064516<br />year: 2010<br />year: 2010"],"type":"scatter","mode":"lines","line":{"width":1.8897637795275593,"color":"rgba(31,161,135,1)","dash":"solid"},"hoveron":"points","name":"2010","legendgroup":"2010","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1,2,3,4,5,6,7,8,9,10,11,12],"y":[2.6806451612903226,3.8071428571428569,7.467741935483871,13.116666666666667,16.229032258064517,18.690000000000001,17.72258064516129,19.829032258064515,16.859999999999999,10.438709677419356,5.5099999999999998,5.6903225806451614],"text":["month:  1<br />temp_mean:  2.6806452<br />year: 2011<br />year: 2011","month:  2<br />temp_mean:  3.8071429<br />year: 2011<br />year: 2011","month:  3<br />temp_mean:  7.4677419<br />year: 2011<br />year: 2011","month:  4<br />temp_mean: 13.1166667<br />year: 2011<br />year: 2011","month:  5<br />temp_mean: 16.2290323<br />year: 2011<br />year: 2011","month:  6<br />temp_mean: 18.6900000<br />year: 2011<br />year: 2011","month:  7<br />temp_mean: 17.7225806<br />year: 2011<br />year: 2011","month:  8<br />temp_mean: 19.8290323<br />year: 2011<br />year: 2011","month:  9<br />temp_mean: 16.8600000<br />year: 2011<br />year: 2011","month: 10<br />temp_mean: 10.4387097<br />year: 2011<br />year: 2011","month: 11<br />temp_mean:  5.5100000<br />year: 2011<br />year: 2011","month: 12<br />temp_mean:  5.6903226<br />year: 2011<br />year: 2011"],"type":"scatter","mode":"lines","line":{"width":1.8897637795275593,"color":"rgba(34,168,132,1)","dash":"solid"},"hoveron":"points","name":"2011","legendgroup":"2011","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1,2,3,4,5,6,7,8,9,10,11,12],"y":[3.870967741935484,-1.3241379310344827,8.5967741935483861,9.8066666666666666,16.019354838709678,17.969999999999999,18.967741935483872,20.409677419354839,15.119999999999999,10.025806451612903,6.3600000000000003,4.064516129032258],"text":["month:  1<br />temp_mean:  3.8709677<br />year: 2012<br />year: 2012","month:  2<br />temp_mean: -1.3241379<br />year: 2012<br />year: 2012","month:  3<br />temp_mean:  8.5967742<br />year: 2012<br />year: 2012","month:  4<br />temp_mean:  9.8066667<br />year: 2012<br />year: 2012","month:  5<br />temp_mean: 16.0193548<br />year: 2012<br />year: 2012","month:  6<br />temp_mean: 17.9700000<br />year: 2012<br />year: 2012","month:  7<br />temp_mean: 18.9677419<br />year: 2012<br />year: 2012","month:  8<br />temp_mean: 20.4096774<br />year: 2012<br />year: 2012","month:  9<br />temp_mean: 15.1200000<br />year: 2012<br />year: 2012","month: 10<br />temp_mean: 10.0258065<br />year: 2012<br />year: 2012","month: 11<br />temp_mean:  6.3600000<br />year: 2012<br />year: 2012","month: 12<br />temp_mean:  4.0645161<br />year: 2012<br />year: 2012"],"type":"scatter","mode":"lines","line":{"width":1.8897637795275593,"color":"rgba(40,174,128,1)","dash":"solid"},"hoveron":"points","name":"2012","legendgroup":"2012","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1,2,3,4,5,6,7,8,9,10,11,12],"y":[2.2129032258064516,0.8035714285714286,3.3806451612903228,10.233333333333333,12.393548387096775,17.57,22.048387096774192,19.467741935483872,15.593333333333334,12.199999999999999,5.9533333333333331,3.6225806451612903],"text":["month:  1<br />temp_mean:  2.2129032<br />year: 2013<br />year: 2013","month:  2<br />temp_mean:  0.8035714<br />year: 2013<br />year: 2013","month:  3<br />temp_mean:  3.3806452<br />year: 2013<br />year: 2013","month:  4<br />temp_mean: 10.2333333<br />year: 2013<br />year: 2013","month:  5<br />temp_mean: 12.3935484<br />year: 2013<br />year: 2013","month:  6<br />temp_mean: 17.5700000<br />year: 2013<br />year: 2013","month:  7<br />temp_mean: 22.0483871<br />year: 2013<br />year: 2013","month:  8<br />temp_mean: 19.4677419<br />year: 2013<br />year: 2013","month:  9<br />temp_mean: 15.5933333<br />year: 2013<br />year: 2013","month: 10<br />temp_mean: 12.2000000<br />year: 2013<br />year: 2013","month: 11<br />temp_mean:  5.9533333<br />year: 2013<br />year: 2013","month: 12<br />temp_mean:  3.6225806<br />year: 2013<br />year: 2013"],"type":"scatter","mode":"lines","line":{"width":1.8897637795275593,"color":"rgba(50,182,122,1)","dash":"solid"},"hoveron":"points","name":"2013","legendgroup":"2013","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1,2,3,4,5,6,7,8,9,10,11,12],"y":[4.725806451612903,5.5499999999999998,8.7064516129032263,12.696666666666667,14.319354838709678,19.343333333333334,20.409677419354839,17.841935483870969,16.546666666666667,13.461290322580645,7.8300000000000001,4.6709677419354838],"text":["month:  1<br />temp_mean:  4.7258065<br />year: 2014<br />year: 2014","month:  2<br />temp_mean:  5.5500000<br />year: 2014<br />year: 2014","month:  3<br />temp_mean:  8.7064516<br />year: 2014<br />year: 2014","month:  4<br />temp_mean: 12.6966667<br />year: 2014<br />year: 2014","month:  5<br />temp_mean: 14.3193548<br />year: 2014<br />year: 2014","month:  6<br />temp_mean: 19.3433333<br />year: 2014<br />year: 2014","month:  7<br />temp_mean: 20.4096774<br />year: 2014<br />year: 2014","month:  8<br />temp_mean: 17.8419355<br />year: 2014<br />year: 2014","month:  9<br />temp_mean: 16.5466667<br />year: 2014<br />year: 2014","month: 10<br />temp_mean: 13.4612903<br />year: 2014<br />year: 2014","month: 11<br />temp_mean:  7.8300000<br />year: 2014<br />year: 2014","month: 12<br />temp_mean:  4.6709677<br />year: 2014<br />year: 2014"],"type":"scatter","mode":"lines","line":{"width":1.8897637795275593,"color":"rgba(61,188,116,1)","dash":"solid"},"hoveron":"points","name":"2014","legendgroup":"2014","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1,2,3,4,5,6,7,8,9,10,11,12],"y":[3.5451612903225804,1.5321428571428573,6.806451612903226,10.52,14.816129032258065,18.469999999999999,22.967741935483872,21.616129032258065,14.806666666666667,10.270967741935484,8.7699999999999996,6.8645161290322578],"text":["month:  1<br />temp_mean:  3.5451613<br />year: 2015<br />year: 2015","month:  2<br />temp_mean:  1.5321429<br />year: 2015<br />year: 2015","month:  3<br />temp_mean:  6.8064516<br />year: 2015<br />year: 2015","month:  4<br />temp_mean: 10.5200000<br />year: 2015<br />year: 2015","month:  5<br />temp_mean: 14.8161290<br />year: 2015<br />year: 2015","month:  6<br />temp_mean: 18.4700000<br />year: 2015<br />year: 2015","month:  7<br />temp_mean: 22.9677419<br />year: 2015<br />year: 2015","month:  8<br />temp_mean: 21.6161290<br />year: 2015<br />year: 2015","month:  9<br />temp_mean: 14.8066667<br />year: 2015<br />year: 2015","month: 10<br />temp_mean: 10.2709677<br />year: 2015<br />year: 2015","month: 11<br />temp_mean:  8.7700000<br />year: 2015<br />year: 2015","month: 12<br />temp_mean:  6.8645161<br />year: 2015<br />year: 2015"],"type":"scatter","mode":"lines","line":{"width":1.8897637795275593,"color":"rgba(74,193,109,1)","dash":"solid"},"hoveron":"points","name":"2015","legendgroup":"2015","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1,2,3,4,5,6,7,8,9,10,11,12],"y":[3.9806451612903224,5.3448275862068968,5.661290322580645,9.6500000000000004,14.641935483870968,18.329999999999998,20.725806451612904,20.154838709677421,18.176666666666666,9.8387096774193541,5.9100000000000001,1.8870967741935485],"text":["month:  1<br />temp_mean:  3.9806452<br />year: 2016<br />year: 2016","month:  2<br />temp_mean:  5.3448276<br />year: 2016<br />year: 2016","month:  3<br />temp_mean:  5.6612903<br />year: 2016<br />year: 2016","month:  4<br />temp_mean:  9.6500000<br />year: 2016<br />year: 2016","month:  5<br />temp_mean: 14.6419355<br />year: 2016<br />year: 2016","month:  6<br />temp_mean: 18.3300000<br />year: 2016<br />year: 2016","month:  7<br />temp_mean: 20.7258065<br />year: 2016<br />year: 2016","month:  8<br />temp_mean: 20.1548387<br />year: 2016<br />year: 2016","month:  9<br />temp_mean: 18.1766667<br />year: 2016<br />year: 2016","month: 10<br />temp_mean:  9.8387097<br />year: 2016<br />year: 2016","month: 11<br />temp_mean:  5.9100000<br />year: 2016<br />year: 2016","month: 12<br />temp_mean:  1.8870968<br />year: 2016<br />year: 2016"],"type":"scatter","mode":"lines","line":{"width":1.8897637795275593,"color":"rgba(89,200,100,1)","dash":"solid"},"hoveron":"points","name":"2016","legendgroup":"2016","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1,2,3,4,5,6,7,8,9,10,11,12],"y":[-1.3774193548387097,5.1321428571428571,9.3096774193548377,9.6433333333333326,16.161290322580644,20.43,20.909677419354839,20.022580645161291,14.246666666666666,11.974193548387097,6.1600000000000001,4.209677419354839],"text":["month:  1<br />temp_mean: -1.3774194<br />year: 2017<br />year: 2017","month:  2<br />temp_mean:  5.1321429<br />year: 2017<br />year: 2017","month:  3<br />temp_mean:  9.3096774<br />year: 2017<br />year: 2017","month:  4<br />temp_mean:  9.6433333<br />year: 2017<br />year: 2017","month:  5<br />temp_mean: 16.1612903<br />year: 2017<br />year: 2017","month:  6<br />temp_mean: 20.4300000<br />year: 2017<br />year: 2017","month:  7<br />temp_mean: 20.9096774<br />year: 2017<br />year: 2017","month:  8<br />temp_mean: 20.0225806<br />year: 2017<br />year: 2017","month:  9<br />temp_mean: 14.2466667<br />year: 2017<br />year: 2017","month: 10<br />temp_mean: 11.9741935<br />year: 2017<br />year: 2017","month: 11<br />temp_mean:  6.1600000<br />year: 2017<br />year: 2017","month: 12<br />temp_mean:  4.2096774<br />year: 2017<br />year: 2017"],"type":"scatter","mode":"lines","line":{"width":1.8897637795275593,"color":"rgba(104,205,91,1)","dash":"solid"},"hoveron":"points","name":"2017","legendgroup":"2017","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1,2,3,4,5,6,7,8,9,10,11,12],"y":[6.6838709677419352,0.5357142857142857,5.2548387096774194,13.970000000000001,16.858064516129033,19.996666666666666,22.464516129032258,22.009677419354841,16.883333333333333,11.964516129032258,6.3233333333333333,5.080645161290323],"text":["month:  1<br />temp_mean:  6.6838710<br />year: 2018<br />year: 2018","month:  2<br />temp_mean:  0.5357143<br />year: 2018<br />year: 2018","month:  3<br />temp_mean:  5.2548387<br />year: 2018<br />year: 2018","month:  4<br />temp_mean: 13.9700000<br />year: 2018<br />year: 2018","month:  5<br />temp_mean: 16.8580645<br />year: 2018<br />year: 2018","month:  6<br />temp_mean: 19.9966667<br />year: 2018<br />year: 2018","month:  7<br />temp_mean: 22.4645161<br />year: 2018<br />year: 2018","month:  8<br />temp_mean: 22.0096774<br />year: 2018<br />year: 2018","month:  9<br />temp_mean: 16.8833333<br />year: 2018<br />year: 2018","month: 10<br />temp_mean: 11.9645161<br />year: 2018<br />year: 2018","month: 11<br />temp_mean:  6.3233333<br />year: 2018<br />year: 2018","month: 12<br />temp_mean:  5.0806452<br />year: 2018<br />year: 2018"],"type":"scatter","mode":"lines","line":{"width":1.8897637795275593,"color":"rgba(122,209,81,1)","dash":"solid"},"hoveron":"points","name":"2018","legendgroup":"2018","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1,2,3,4,5,6,7,8,9,10,11,12],"y":[1.9290322580645161,4.875,8.4419354838709673,10.763333333333334,12.54516129032258,20.850000000000001,21.329032258064515,20.816129032258065,15.879999999999999,12.548387096774194,6.1866666666666665,4.5903225806451609],"text":["month:  1<br />temp_mean:  1.9290323<br />year: 2019<br />year: 2019","month:  2<br />temp_mean:  4.8750000<br />year: 2019<br />year: 2019","month:  3<br />temp_mean:  8.4419355<br />year: 2019<br />year: 2019","month:  4<br />temp_mean: 10.7633333<br />year: 2019<br />year: 2019","month:  5<br />temp_mean: 12.5451613<br />year: 2019<br />year: 2019","month:  6<br />temp_mean: 20.8500000<br />year: 2019<br />year: 2019","month:  7<br />temp_mean: 21.3290323<br />year: 2019<br />year: 2019","month:  8<br />temp_mean: 20.8161290<br />year: 2019<br />year: 2019","month:  9<br />temp_mean: 15.8800000<br />year: 2019<br />year: 2019","month: 10<br />temp_mean: 12.5483871<br />year: 2019<br />year: 2019","month: 11<br />temp_mean:  6.1866667<br />year: 2019<br />year: 2019","month: 12<br />temp_mean:  4.5903226<br />year: 2019<br />year: 2019"],"type":"scatter","mode":"lines","line":{"width":1.8897637795275593,"color":"rgba(140,214,70,1)","dash":"solid"},"hoveron":"points","name":"2019","legendgroup":"2019","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1,2,3,4,5,6,7,8,9,10,11,12],"y":[4.112903225806452,7.2068965517241379,7.3419354838709676,12.623333333333333,14.390322580645162,18.350000000000001,20.958064516129031,22.112903225806452,17.143333333333334,11.5,6.5933333333333337,4.387096774193548],"text":["month:  1<br />temp_mean:  4.1129032<br />year: 2020<br />year: 2020","month:  2<br />temp_mean:  7.2068966<br />year: 2020<br />year: 2020","month:  3<br />temp_mean:  7.3419355<br />year: 2020<br />year: 2020","month:  4<br />temp_mean: 12.6233333<br />year: 2020<br />year: 2020","month:  5<br />temp_mean: 14.3903226<br />year: 2020<br />year: 2020","month:  6<br />temp_mean: 18.3500000<br />year: 2020<br />year: 2020","month:  7<br />temp_mean: 20.9580645<br />year: 2020<br />year: 2020","month:  8<br />temp_mean: 22.1129032<br />year: 2020<br />year: 2020","month:  9<br />temp_mean: 17.1433333<br />year: 2020<br />year: 2020","month: 10<br />temp_mean: 11.5000000<br />year: 2020<br />year: 2020","month: 11<br />temp_mean:  6.5933333<br />year: 2020<br />year: 2020","month: 12<br />temp_mean:  4.3870968<br />year: 2020<br />year: 2020"],"type":"scatter","mode":"lines","line":{"width":1.8897637795275593,"color":"rgba(159,218,58,1)","dash":"solid"},"hoveron":"points","name":"2020","legendgroup":"2020","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1,2,3,4,5,6,7,8,9,10,11,12],"y":[2.5677419354838711,3.8964285714285714,6.2806451612903222,8.0233333333333334,12.012903225806452,20.463333333333335,19.419354838709676,18.125806451612902,16.68,10.003225806451614,5.0700000000000003,4.7516129032258068],"text":["month:  1<br />temp_mean:  2.5677419<br />year: 2021<br />year: 2021","month:  2<br />temp_mean:  3.8964286<br />year: 2021<br />year: 2021","month:  3<br />temp_mean:  6.2806452<br />year: 2021<br />year: 2021","month:  4<br />temp_mean:  8.0233333<br />year: 2021<br />year: 2021","month:  5<br />temp_mean: 12.0129032<br />year: 2021<br />year: 2021","month:  6<br />temp_mean: 20.4633333<br />year: 2021<br />year: 2021","month:  7<br />temp_mean: 19.4193548<br />year: 2021<br />year: 2021","month:  8<br />temp_mean: 18.1258065<br />year: 2021<br />year: 2021","month:  9<br />temp_mean: 16.6800000<br />year: 2021<br />year: 2021","month: 10<br />temp_mean: 10.0032258<br />year: 2021<br />year: 2021","month: 11<br />temp_mean:  5.0700000<br />year: 2021<br />year: 2021","month: 12<br />temp_mean:  4.7516129<br />year: 2021<br />year: 2021"],"type":"scatter","mode":"lines","line":{"width":1.8897637795275593,"color":"rgba(178,221,45,1)","dash":"solid"},"hoveron":"points","name":"2021","legendgroup":"2021","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1,2,3,4,5,6,7,8,9,10,11,12],"y":[3.2290322580645161,6.1071428571428568,7.0935483870967744,9.7966666666666669,16.683870967741935,20.713333333333335,22.274193548387096,22.919354838709676,15.343333333333334,14.190322580645162,8.2699999999999996,3.7354838709677418],"text":["month:  1<br />temp_mean:  3.2290323<br />year: 2022<br />year: 2022","month:  2<br />temp_mean:  6.1071429<br />year: 2022<br />year: 2022","month:  3<br />temp_mean:  7.0935484<br />year: 2022<br />year: 2022","month:  4<br />temp_mean:  9.7966667<br />year: 2022<br />year: 2022","month:  5<br />temp_mean: 16.6838710<br />year: 2022<br />year: 2022","month:  6<br />temp_mean: 20.7133333<br />year: 2022<br />year: 2022","month:  7<br />temp_mean: 22.2741935<br />year: 2022<br />year: 2022","month:  8<br />temp_mean: 22.9193548<br />year: 2022<br />year: 2022","month:  9<br />temp_mean: 15.3433333<br />year: 2022<br />year: 2022","month: 10<br />temp_mean: 14.1903226<br />year: 2022<br />year: 2022","month: 11<br />temp_mean:  8.2700000<br />year: 2022<br />year: 2022","month: 12<br />temp_mean:  3.7354839<br />year: 2022<br />year: 2022"],"type":"scatter","mode":"lines","line":{"width":1.8897637795275593,"color":"rgba(197,224,33,1)","dash":"solid"},"hoveron":"points","name":"2022","legendgroup":"2022","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1,2,3,4,5,6,7,8,9,10,11,12],"y":[5.1258064516129034,4.8357142857142854,8.0354838709677416,9.5999999999999996,15.451612903225806,21.343333333333334,20.970967741935485,20.551612903225806,19.033333333333335,13.570967741935483,7.7999999999999998,5.854838709677419],"text":["month:  1<br />temp_mean:  5.1258065<br />year: 2023<br />year: 2023","month:  2<br />temp_mean:  4.8357143<br />year: 2023<br />year: 2023","month:  3<br />temp_mean:  8.0354839<br />year: 2023<br />year: 2023","month:  4<br />temp_mean:  9.6000000<br />year: 2023<br />year: 2023","month:  5<br />temp_mean: 15.4516129<br />year: 2023<br />year: 2023","month:  6<br />temp_mean: 21.3433333<br />year: 2023<br />year: 2023","month:  7<br />temp_mean: 20.9709677<br />year: 2023<br />year: 2023","month:  8<br />temp_mean: 20.5516129<br />year: 2023<br />year: 2023","month:  9<br />temp_mean: 19.0333333<br />year: 2023<br />year: 2023","month: 10<br />temp_mean: 13.5709677<br />year: 2023<br />year: 2023","month: 11<br />temp_mean:  7.8000000<br />year: 2023<br />year: 2023","month: 12<br />temp_mean:  5.8548387<br />year: 2023<br />year: 2023"],"type":"scatter","mode":"lines","line":{"width":1.8897637795275593,"color":"rgba(217,226,25,1)","dash":"solid"},"hoveron":"points","name":"2023","legendgroup":"2023","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1,2,3,4,5,6,7,8,9,10,11,12],"y":[2.6741935483870969,8.4965517241379303,9.1806451612903235,11.19,15.719354838709677,18.780000000000001,20.719354838709677,21.770967741935483,16.510000000000002,12.283870967741935,6.75,3.7935483870967741],"text":["month:  1<br />temp_mean:  2.6741935<br />year: 2024<br />year: 2024","month:  2<br />temp_mean:  8.4965517<br />year: 2024<br />year: 2024","month:  3<br />temp_mean:  9.1806452<br />year: 2024<br />year: 2024","month:  4<br />temp_mean: 11.1900000<br />year: 2024<br />year: 2024","month:  5<br />temp_mean: 15.7193548<br />year: 2024<br />year: 2024","month:  6<br />temp_mean: 18.7800000<br />year: 2024<br />year: 2024","month:  7<br />temp_mean: 20.7193548<br />year: 2024<br />year: 2024","month:  8<br />temp_mean: 21.7709677<br />year: 2024<br />year: 2024","month:  9<br />temp_mean: 16.5100000<br />year: 2024<br />year: 2024","month: 10<br />temp_mean: 12.2838710<br />year: 2024<br />year: 2024","month: 11<br />temp_mean:  6.7500000<br />year: 2024<br />year: 2024","month: 12<br />temp_mean:  3.7935484<br />year: 2024<br />year: 2024"],"type":"scatter","mode":"lines","line":{"width":1.8897637795275593,"color":"rgba(235,229,27,1)","dash":"solid"},"hoveron":"points","name":"2024","legendgroup":"2024","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1,2,3,4,5,6,7,8,9,10,11,12],"y":[3.629032258064516,3.4321428571428569,7.6838709677419352,11.813333333333333,14.993548387096775,21.433333333333334,20.254838709677419,20.364516129032257,15.476666666666667,11.480645161290322,5.6600000000000001,3.5548387096774192],"text":["month:  1<br />temp_mean:  3.6290323<br />year: 2025<br />year: 2025","month:  2<br />temp_mean:  3.4321429<br />year: 2025<br />year: 2025","month:  3<br />temp_mean:  7.6838710<br />year: 2025<br />year: 2025","month:  4<br />temp_mean: 11.8133333<br />year: 2025<br />year: 2025","month:  5<br />temp_mean: 14.9935484<br />year: 2025<br />year: 2025","month:  6<br />temp_mean: 21.4333333<br />year: 2025<br />year: 2025","month:  7<br />temp_mean: 20.2548387<br />year: 2025<br />year: 2025","month:  8<br />temp_mean: 20.3645161<br />year: 2025<br />year: 2025","month:  9<br />temp_mean: 15.4766667<br />year: 2025<br />year: 2025","month: 10<br />temp_mean: 11.4806452<br />year: 2025<br />year: 2025","month: 11<br />temp_mean:  5.6600000<br />year: 2025<br />year: 2025","month: 12<br />temp_mean:  3.5548387<br />year: 2025<br />year: 2025"],"type":"scatter","mode":"lines","line":{"width":1.8897637795275593,"color":"rgba(253,231,37,1)","dash":"solid"},"hoveron":"points","name":"2025","legendgroup":"2025","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":23.305936073059364,"r":7.3059360730593621,"b":22.648401826484022,"l":37.260273972602747},"paper_bgcolor":"rgba(255,255,255,1)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[0.44999999999999996,12.550000000000001],"tickmode":"array","ticktext":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"tickvals":[1,2,3,4,5,6,7.0000000000000009,8,9,10,11,12],"categoryorder":"array","categoryarray":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.6529680365296811,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.68949771689498},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176002,"zeroline":false,"anchor":"y","title":{"text":"","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-3.4291935483870963,26.096935483870968],"tickmode":"array","ticktext":["0","5","10","15","20","25"],"tickvals":[0,5.0000000000000009,10,15,20,25],"categoryorder":"array","categoryarray":["0","5","10","15","20","25"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.6529680365296811,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.68949771689498},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176002,"zeroline":false,"anchor":"x","title":{"text":"Mean temperature (°C)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}},"hoverformat":".2f"},"shapes":[],"showlegend":true,"legend":{"bgcolor":null,"bordercolor":null,"borderwidth":0,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.68949771689498},"title":{"text":"","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"source":"A","attrs":{"2cf9c1d33e483":{"x":{},"y":{},"colour":{},"type":"scatter"}},"cur_data":"2cf9c1d33e483","visdat":{"2cf9c1d33e483":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-explore-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Monthly mean temperature in Karlsruhe, one line per year since 1990.
+</figcaption>
+</figure>
+</div>
+</div>
+<p>Compare this with the <a href="./index.html#fig-anomaly">yearly view</a> on the home page and the <a href="./days.html#fig-days">hot and frost days</a>.</p>
+
+
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

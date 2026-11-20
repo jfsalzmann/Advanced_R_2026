@@ -1,0 +1,17 @@
+{
+  "hash": "5148d6379503f78f8e6273cd0de53b47",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Karlsruhe is getting warmer\"\n---\n\n\n::: {.cell}\n\n:::\n\n\nThis small website uses daily weather data for Karlsruhe since 1876 from\n[@dwd2026](references.qmd#ref-dwd2026). It has three pages: this one, [Hot and frost days](days.qmd), and\n[Explore](explore.qmd). All sources are listed on the [References](references.qmd) page.\n\n## Annual temperature\n\n@fig-anomaly shows how much warmer or colder each year was than the 1961–1990 mean.\n\n\n::: {.cell}\n::: {.cell-output-display}\n![Annual mean temperature in Karlsruhe, deviation from the 1961–1990 mean.](index_files/figure-html/fig-anomaly-1.png){#fig-anomaly width=672}\n:::\n:::\n\n\nThe warming also shows in the extremes: hot days have become more frequent\n([the hot-days figure](days.qmd#fig-days) on the next page), and you can explore every single year interactively in the\n[plotly figure on the Explore page](explore.qmd#fig-explore). The colours follow the idea of the warming stripes by\n[@hawkins2018](references.qmd#ref-hawkins2018).\n",
+    "supporting": [
+      "index_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

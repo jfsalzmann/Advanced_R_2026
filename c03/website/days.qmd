@@ -1,0 +1,39 @@
+---
+title: "Hot and frost days"
+---
+
+```{r}
+#| label: setup
+if (!require(pacman)) install.packages("pacman")
+p_load(tidyverse)
+
+days <- read_csv("data/weather_karlsruhe.csv") |>
+  group_by(year = year(date)) |>
+  summarize(
+    `Hot days (max ≥ 30 °C)` = sum(temp_max >= 30, na.rm = TRUE),
+    `Frost days (min < 0 °C)` = sum(temp_min < 0, na.rm = TRUE),
+    n_days = n()
+  ) |>
+  filter(n_days >= 360) |>
+  select(-n_days) |>
+  pivot_longer(-year, names_to = "type", values_to = "days")
+```
+
+The annual mean in the [anomaly figure on the home page](index.qmd#fig-anomaly) hides how the extremes changed.
+@fig-days counts hot and frost days per year, with a smoothed trend, made with ggplot2 as in
+[@wickham2023](references.qmd#ref-wickham2023).
+
+```{r}
+#| label: fig-days
+#| fig-cap: "Hot and frost days per year in Karlsruhe."
+days |>
+  ggplot(aes(x = year, y = days, colour = type)) +
+  geom_point(alpha = 0.4) +
+  geom_smooth(method = "loess", formula = y ~ x, se = FALSE) +
+  scale_colour_manual(values = c("steelblue", "firebrick")) +
+  labs(x = NULL, y = "Days per year", colour = NULL) +
+  theme_minimal() +
+  theme(legend.position = "top")
+```
+
+As @fig-days shows, frost days became rarer while hot days became more common.

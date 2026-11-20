@@ -1,0 +1,37 @@
+[
+  {
+    "objectID": "days.html",
+    "href": "days.html",
+    "title": "Hot and frost days",
+    "section": "",
+    "text": "The annual mean in the anomaly figure on the home page hides how the extremes changed. Figure 1 counts hot and frost days per year, with a smoothed trend, made with ggplot2 as in Wickham et al. (2023).\n\n\n\n\n\n\n\n\nFigure 1: Hot and frost days per year in Karlsruhe.\n\n\n\n\n\nAs Figure 1 shows, frost days became rarer while hot days became more common."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Karlsruhe is getting warmer",
+    "section": "",
+    "text": "This small website uses daily weather data for Karlsruhe since 1876 from Deutscher Wetterdienst (2026). It has three pages: this one, Hot and frost days, and Explore. All sources are listed on the References page."
+  },
+  {
+    "objectID": "index.html#annual-temperature",
+    "href": "index.html#annual-temperature",
+    "title": "Karlsruhe is getting warmer",
+    "section": "Annual temperature",
+    "text": "Annual temperature\nFigure 1 shows how much warmer or colder each year was than the 1961–1990 mean.\n\n\n\n\n\n\n\n\nFigure 1: Annual mean temperature in Karlsruhe, deviation from the 1961–1990 mean.\n\n\n\n\n\nThe warming also shows in the extremes: hot days have become more frequent (the hot-days figure on the next page), and you can explore every single year interactively in the plotly figure on the Explore page. The colours follow the idea of the warming stripes by Hawkins (2018)."
+  },
+  {
+    "objectID": "explore.html",
+    "href": "explore.html",
+    "title": "Explore",
+    "section": "",
+    "text": "Figure 1 is interactive: hover over a line to see its year, double-click a year in the legend to show only that one. Data: Deutscher Wetterdienst (2026).\n\n\n\n\n\n\n\n\nFigure 1: Monthly mean temperature in Karlsruhe, one line per year since 1990.\n\n\n\n\nCompare this with the yearly view on the home page and the hot and frost days."
+  },
+  {
+    "objectID": "references.html",
+    "href": "references.html",
+    "title": "References",
+    "section": "",
+    "text": "All sources cited anywhere on this website.\n\n\nDeutscher Wetterdienst. 2026. Historical Daily Station Observations (Temperature, Pressure, Precipitation, Sunshine Duration, Etc.) for Germany. Climate Data Center. https://opendata.dwd.de/climate_environment/CDC/observations_germany/climate/daily/kl/historical/.\n\n\nHawkins, Ed. 2018. Warming Stripes. Climate Lab Book. https://www.climate-lab-book.ac.uk/2018/warming-stripes/.\n\n\nWickham, Hadley, Mine Çetinkaya-Rundel, and Garrett Grolemund. 2023. R for Data Science. 2nd ed. O’Reilly. https://r4ds.hadley.nz/."
+  }
+]

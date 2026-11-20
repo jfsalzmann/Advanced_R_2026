@@ -1,0 +1,32 @@
+---
+title: "Explore"
+---
+
+```{r}
+#| label: setup
+if (!require(pacman)) install.packages("pacman")
+p_load(tidyverse, plotly)
+```
+
+@fig-explore is interactive: hover over a line to see its year, double-click a year in the
+legend to show only that one. Data:
+[@dwd2026](references.qmd#ref-dwd2026).
+
+```{r}
+#| label: fig-explore
+#| fig-cap: "Monthly mean temperature in Karlsruhe, one line per year since 1990."
+(read_csv("data/weather_karlsruhe.csv") |>
+  filter(year(date) >= 1990) |>
+  group_by(year = factor(year(date)), month) |>
+  summarize(temp_mean = mean(temp_mean, na.rm = TRUE), .groups = "drop") |>
+  ggplot(aes(x = month, y = temp_mean, colour = year, group = year)) +
+  geom_line() +
+  scale_x_continuous(breaks = 1:12, labels = month.abb) +
+  scale_colour_viridis_d() +
+  labs(x = NULL, y = "Mean temperature (°C)", colour = NULL) +
+  theme_minimal()) |>
+  ggplotly()
+```
+
+Compare this with the [yearly view](index.qmd#fig-anomaly) on the home page and the
+[hot and frost days](days.qmd#fig-days).

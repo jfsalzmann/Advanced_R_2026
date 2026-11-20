@@ -1,0 +1,47 @@
+---
+title: "Karlsruhe is getting warmer"
+---
+
+```{r}
+#| label: setup
+if (!require(pacman)) install.packages("pacman")
+p_load(tidyverse)
+
+yearly <- read_csv("data/weather_karlsruhe.csv") |>
+  group_by(year = year(date)) |>
+  summarize(
+    temp_mean = mean(temp_mean, na.rm = TRUE),
+    n_days = n()
+  ) |>
+  filter(n_days >= 360)
+```
+
+This small website uses daily weather data for Karlsruhe since 1876 from
+[@dwd2026](references.qmd#ref-dwd2026). It has three pages: this one, [Hot and frost days](days.qmd), and
+[Explore](explore.qmd). All sources are listed on the [References](references.qmd) page.
+
+## Annual temperature
+
+@fig-anomaly shows how much warmer or colder each year was than the 1961–1990 mean.
+
+```{r}
+#| label: fig-anomaly
+#| fig-cap: "Annual mean temperature in Karlsruhe, deviation from the 1961–1990 mean."
+reference_mean <- yearly |>
+  filter(year %in% 1961:1990) |>
+  pull(temp_mean) |>
+  mean()
+
+yearly |>
+  mutate(anomaly = temp_mean - reference_mean) |>
+  ggplot(aes(x = year, y = anomaly, fill = anomaly)) +
+  geom_col() +
+  scale_fill_gradient2(low = "steelblue", mid = "grey90", high = "firebrick", guide = "none") +
+  labs(x = NULL, y = "Deviation (°C)") +
+  theme_minimal()
+```
+
+The warming also shows in the extremes: hot days have become more frequent
+([the hot-days figure](days.qmd#fig-days) on the next page), and you can explore every single year interactively in the
+[plotly figure on the Explore page](explore.qmd#fig-explore). The colours follow the idea of the warming stripes by
+[@hawkins2018](references.qmd#ref-hawkins2018).
