@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Johann-Friedrich Salzmann">
+<meta name="dcterms.date" content="2026-11-20">
+
+<title>c03 — Quarto Reports</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="c03_files/libs/clipboard/clipboard.min.js"></script>
+<script src="c03_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="c03_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="c03_files/libs/quarto-html/popper.min.js"></script>
+<script src="c03_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="c03_files/libs/quarto-html/anchor.min.js"></script>
+<link href="c03_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="c03_files/libs/quarto-html/quarto-syntax-highlighting-bb62276ab45c84d9efd712f51ff97b5a.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="c03_files/libs/quarto-html/quarto-syntax-highlighting-dark-5a1953863e1f72ef3b996ef827f01ca7.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="c03_files/libs/quarto-html/quarto-syntax-highlighting-bb62276ab45c84d9efd712f51ff97b5a.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="c03_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="c03_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="c03_files/libs/bootstrap/bootstrap-e432cd656ca94227e5e2fd54501f18e3.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="c03_files/libs/bootstrap/bootstrap-dark-e432cd656ca94227e5e2fd54501f18e3.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
+<link href="c03_files/libs/bootstrap/bootstrap-e432cd656ca94227e5e2fd54501f18e3.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script src="c03_files/libs/quarto-contrib/clickrun-1.0.0/clickrun.js"></script>
+<link href="c03_files/libs/quarto-contrib/clickrun-1.0.0/theme.css" rel="stylesheet">
+<link href="c03_files/libs/quarto-contrib/clickrun-1.0.0/clickrun.css" rel="stylesheet">
+<link href="c03_files/libs/quarto-contrib/clickrun-1.0.0/outputs.css" rel="stylesheet">
+<link href="c03_files/libs/quarto-contrib/clickrun-fontawesome-7.3.1/all.min.css" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&amp;family=Roboto:wght@400;700&amp;family=Roboto+Mono&amp;display=swap" rel="stylesheet">
+<link href="c03_files/libs/htmltools-fill-0.5.9/fill.css" rel="stylesheet">
+<script src="c03_files/libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<script src="c03_files/libs/datatables-binding-0.34.0/datatables.js"></script>
+<script src="c03_files/libs/jquery-3.6.1/jquery-3.6.1.min.js"></script>
+<script src="c03_files/libs/dt-core-1.13.6/js/jquery.dataTables.min.js"></script>
+<link href="c03_files/libs/crosstalk-1.2.2/css/crosstalk.min.css" rel="stylesheet">
+<script src="c03_files/libs/crosstalk-1.2.2/js/crosstalk.min.js"></script>
+<link rel="icon" type="image/svg+xml" href="c03_files/libs/quarto-contrib/clickrun-1.0.0/advanced-r.svg">
+
+
+</head>
+
+<body class="quarto-light">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#packages" id="toc-packages" class="nav-link active" data-scroll-target="#packages">Packages</a></li>
+  <li><a href="#quarto-vs.-r-markdown" id="toc-quarto-vs.-r-markdown" class="nav-link" data-scroll-target="#quarto-vs.-r-markdown">Quarto vs.&nbsp;R Markdown</a></li>
+  <li><a href="#a-projects-file-structure" id="toc-a-projects-file-structure" class="nav-link" data-scroll-target="#a-projects-file-structure">A project’s file structure</a></li>
+  <li><a href="#output-formats" id="toc-output-formats" class="nav-link" data-scroll-target="#output-formats">Output formats</a>
+  <ul class="collapse">
+  <li><a href="#inline-vs.-preview" id="toc-inline-vs.-preview" class="nav-link" data-scroll-target="#inline-vs.-preview">Inline vs.&nbsp;preview</a></li>
+  </ul></li>
+  <li><a href="#code-chunks" id="toc-code-chunks" class="nav-link" data-scroll-target="#code-chunks">Code chunks</a>
+  <ul class="collapse">
+  <li><a href="#inline-code" id="toc-inline-code" class="nav-link" data-scroll-target="#inline-code">Inline code</a></li>
+  </ul></li>
+  <li><a href="#figures-tables-images" id="toc-figures-tables-images" class="nav-link" data-scroll-target="#figures-tables-images">Figures, tables, images</a></li>
+  <li><a href="#text-formatting-links-formulas" id="toc-text-formatting-links-formulas" class="nav-link" data-scroll-target="#text-formatting-links-formulas">Text: formatting, links, formulas</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  <li><a href="#reproducibility-at-a-glance" id="toc-reproducibility-at-a-glance" class="nav-link" data-scroll-target="#reproducibility-at-a-glance">Reproducibility at a glance</a></li>
+  <li><a href="#caching-only-re-run-what-changed" id="toc-caching-only-re-run-what-changed" class="nav-link" data-scroll-target="#caching-only-re-run-what-changed">Caching: only re-run what changed</a>
+  <ul class="collapse">
+  <li><a href="#freeze-skip-whole-documents" id="toc-freeze-skip-whole-documents" class="nav-link" data-scroll-target="#freeze-skip-whole-documents"><code>freeze</code>: skip whole documents</a></li>
+  <li><a href="#cache-true-skip-single-chunks" id="toc-cache-true-skip-single-chunks" class="nav-link" data-scroll-target="#cache-true-skip-single-chunks"><code>cache: true</code>: skip single chunks</a></li>
+  <li><a href="#declaring-dependencies" id="toc-declaring-dependencies" class="nav-link" data-scroll-target="#declaring-dependencies">Declaring dependencies</a></li>
+  </ul></li>
+  <li><a href="#random-numbers-and-seeds" id="toc-random-numbers-and-seeds" class="nav-link" data-scroll-target="#random-numbers-and-seeds">Random numbers and seeds</a>
+  <ul class="collapse">
+  <li><a href="#sampling-rows-from-a-tibble" id="toc-sampling-rows-from-a-tibble" class="nav-link" data-scroll-target="#sampling-rows-from-a-tibble">Sampling rows from a tibble</a></li>
+  </ul></li>
+  <li><a href="#try-it-your-own-report" id="toc-try-it-your-own-report" class="nav-link" data-scroll-target="#try-it-your-own-report">Try it: your own report</a></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="c03.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li><li><a href="c03.pdf"><i class="bi bi-file-pdf"></i>Typst</a></li></ul></div></nav>
+</div>
+<main class="content" id="quarto-document-content">
+<img src="c03_files/libs/quarto-contrib/clickrun-1.0.0/advanced-r.svg" alt="Course logo" class="course-logo">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">c03 — Quarto Reports</h1>
+<p class="subtitle lead">From analysis to report: document structure, output formats, figures, tables, formulas, references, reproducibility, caching, and random numbers</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Johann-Friedrich Salzmann <a href="mailto:jf.salzmann@uni-mannheim.de" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Date</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">November 20, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="packages" class="level2">
+<h2 class="anchored" data-anchor-id="packages">Packages</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(pacman)) <span class="fu">install.packages</span>(<span class="st">"pacman"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr cell-output-message">
+<pre><code>Loading required package: pacman
+</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">p_load</span>(tidyverse, quarto)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="quarto-vs.-r-markdown" class="level2">
+<h2 class="anchored" data-anchor-id="quarto-vs.-r-markdown">Quarto vs.&nbsp;R Markdown</h2>
+<p>Quarto is the successor of R Markdown: same idea (text + code + output in one file), but one tool for R, Python and Julia, many output formats, and a cleaner syntax for chunk options (<code>#|</code> lines instead of <code>{r, echo=FALSE}</code>). Existing <code>.Rmd</code> files mostly render unchanged.</p>
+<p>This module works with a small example project: <a href="report/"><code>c03/report/</code></a>, rendered to <a href="report/report.html">HTML</a> and <a href="report/report.pdf">PDF</a>. Open <code>report.qmd</code> next to this page.</p>
+</section>
+<section id="a-projects-file-structure" class="level2">
+<h2 class="anchored" data-anchor-id="a-projects-file-structure">A project’s file structure</h2>
+<pre><code>report/
+├── _quarto.yml       shared settings for every .qmd in the folder
+├── report.qmd        the report: YAML header, text, code chunks
+├── references.bib    bibliography (BibTeX)
+├── data/             input data
+└── images/           static images</code></pre>
+<p><code>_quarto.yml</code> holds everything that’s the same for all documents, so each <code>.qmd</code> header stays short:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">execute</span><span class="kw">:</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">freeze</span><span class="kw">:</span><span class="at"> auto</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">echo</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">warning</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">message</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="fu">format</span><span class="kw">:</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">html</span><span class="kw">:</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">toc</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">number-sections</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">embed-resources</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">typst</span><span class="kw">:</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">toc</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">number-sections</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">papersize</span><span class="kw">:</span><span class="at"> a4</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="fu">bibliography</span><span class="kw">:</span><span class="at"> references.bib</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The document’s own YAML header adds what’s specific to it:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">"Karlsruhe Is Getting Warmer"</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">subtitle</span><span class="kw">:</span><span class="at"> </span><span class="st">"A short climate report from 150 years of daily weather data"</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="fu">author</span><span class="kw">:</span><span class="at"> </span><span class="st">"Your Name"</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">date</span><span class="kw">:</span><span class="at"> today</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="output-formats" class="level2">
+<h2 class="anchored" data-anchor-id="output-formats">Output formats</h2>
+<ul>
+<li><strong>HTML</strong>: interactive (plotly works), one self-contained file with <code>embed-resources: true</code>.</li>
+<li><strong>PDF via Typst</strong>: modern, fast, no LaTeX installation needed. Our default for PDFs.</li>
+<li><strong>PDF via LaTeX</strong> (<code>format: pdf</code>): the classic route, needs a TeX distribution (<code>quarto install tinytex</code>), slower, but required by some journals’ templates.</li>
+<li>Also: Word (<code>docx</code>), slides (<code>revealjs</code>), websites, books.</li>
+</ul>
+<p>Render from the terminal, or with the <em>Preview</em> button in Positron:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> render report.qmd               <span class="co"># all formats in _quarto.yml</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> render report.qmd <span class="at">--to</span> typst    <span class="co"># just one</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> preview report.qmd              <span class="co"># re-renders on every save</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>From R, the <code>quarto</code> package does the same:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">quarto_render</span>(<span class="st">"c03/report/report.qmd"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<section id="inline-vs.-preview" class="level3">
+<h3 class="anchored" data-anchor-id="inline-vs.-preview">Inline vs.&nbsp;preview</h3>
+<p>In Positron, chunks run <strong>inline</strong> in the console while you write (<code>Ctrl/Cmd + Enter</code>), using your current session. <strong>Rendering</strong> always starts a fresh R session from top to bottom, which is the check that your document is reproducible: a chunk that only works because of something you ran by hand will fail there.</p>
+</section>
+</section>
+<section id="code-chunks" class="level2">
+<h2 class="anchored" data-anchor-id="code-chunks">Code chunks</h2>
+<p>Chunk options go in <code>#|</code> lines at the top of the chunk:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-anomaly</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Annual mean temperature, deviation from the 1961-1990 mean."</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>yearly <span class="sc">|&gt;</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> anomaly)) <span class="sc">+</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>()</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The most useful ones:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Option</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>echo: false</code></td>
+<td>hide the code, show the output</td>
+</tr>
+<tr class="even">
+<td><code>eval: false</code></td>
+<td>show the code, don’t run it</td>
+</tr>
+<tr class="odd">
+<td><code>include: false</code></td>
+<td>run it, show nothing (setup chunks)</td>
+</tr>
+<tr class="even">
+<td><code>warning: false</code> / <code>message: false</code></td>
+<td>hide warnings / messages</td>
+</tr>
+<tr class="odd">
+<td><code>fig-cap</code>, <code>fig-width</code>, <code>fig-height</code></td>
+<td>figure caption and size (inches)</td>
+</tr>
+<tr class="even">
+<td><code>cache: true</code></td>
+<td>store the result, skip re-running (see below)</td>
+</tr>
+</tbody>
+</table>
+<section id="inline-code" class="level3">
+<h3 class="anchored" data-anchor-id="inline-code">Inline code</h3>
+<p>Numbers in the text come straight from R, so they update when the data changes:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>The warmest year on record is <span class="in">`r warmest_year`</span>.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Compute such values in a chunk first and keep inline code short (one variable, maybe a <code>round()</code>).</p>
+</section>
+</section>
+<section id="figures-tables-images" class="level2">
+<h2 class="anchored" data-anchor-id="figures-tables-images">Figures, tables, images</h2>
+<p>A chunk label starting with <code>fig-</code> plus a <code>fig-cap</code> makes a numbered figure you can refer to with <code>@fig-anomaly</code>. Tables work the same with <code>tbl-</code> and <code>tbl-cap</code>; <code>knitr::kable()</code> turns a tibble into a table:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: tbl-days</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co">#| tbl-cap: "Average number of days per year."</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>period_means <span class="sc">|&gt;</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="at">digits =</span> <span class="dv">1</span>)</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>An alternative to <code>kable()</code> is <code>tt()</code> from the <code>tinytable</code> package. Its tables are styled out of the box and adapt on their own to HTML and Typst, and it’s what <code>modelsummary</code> uses for regression tables. <code>format_tt()</code> formats the numbers (<code>num_fmt = "decimal"</code> counts decimal places, the default counts significant digits):</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: tbl-days</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co">#| tbl-cap: "Average number of days per year."</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="fu">p_load</span>(tinytable)</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>period_means <span class="sc">|&gt;</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tt</span>() <span class="sc">|&gt;</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">format_tt</span>(<span class="at">digits =</span> <span class="dv">1</span>, <span class="at">num_fmt =</span> <span class="st">"decimal"</span>)</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Static images use Markdown syntax, with an optional label for cross-references:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="al">![Warming stripes for Karlsruhe.](images/stripes.png)</span>{#fig-stripes width=80%}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="text-formatting-links-formulas" class="level2">
+<h2 class="anchored" data-anchor-id="text-formatting-links-formulas">Text: formatting, links, formulas</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>**bold**, *italic*, <span class="in">`code`</span>, <span class="co">[</span><span class="ot">a link</span><span class="co">](https://quarto.org)</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">## A section heading</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>a bullet point</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>a numbered item</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>Inline math: $\Delta T_t$. A display formula:</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>\Delta T_t = \bar{T}_t - \frac{1}{30} \sum_{s \in R} \bar{T}_s</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>$$</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Formulas are LaTeX by default: the HTML shows them with MathJax, and Quarto translates them for Typst. If you’d rather write Typst’s own math syntax (fewer backslashes and braces), my Quarto extension <a href="https://github.com/jfsalzmann/quarto-typst-equations">typst-equations</a> renders Typst math in HTML and PDF alike. Useful links:</p>
+<ul>
+<li>Typst: <a href="https://typst.app" class="uri">https://typst.app</a></li>
+<li>Typst’s math syntax: <a href="https://typst.app/docs/reference/math/" class="uri">https://typst.app/docs/reference/math/</a></li>
+<li>converting LaTeX formulas to Typst: <a href="https://qwinsi.github.io/tex2typst-webapp/" class="uri">https://qwinsi.github.io/tex2typst-webapp/</a></li>
+</ul>
+<p>Positron’s <em>Visual</em> editor mode (top right of a <code>.qmd</code>) shows the formatted result while you type, useful for long text.</p>
+</section>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
+<p>Cite entries of the <code>.bib</code> file with <code>@key</code>, in brackets for parenthetical citations:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="an">Data:</span><span class="co"> Deutscher Wetterdienst [@dwd2026], analysed with the tidyverse [@wickham2023].</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Quarto adds the bibliography at the end, or wherever a <code>::: {#refs}</code> block stands. BibTeX entries come from Google Scholar, Zotero (with the Better BibTeX plugin), or the DOI (Positron’s visual editor: <em>Insert → Citation</em>).</p>
+</section>
+<section id="reproducibility-at-a-glance" class="level2">
+<h2 class="anchored" data-anchor-id="reproducibility-at-a-glance">Reproducibility at a glance</h2>
+<p>A reproducible analysis gives the same results on another computer, or on yours in two years. Tools that help, from small to big, mentioned here only:</p>
+<ul>
+<li><strong>Seeds</strong>: <code>set.seed()</code> makes random draws repeat (see “Random numbers and seeds” below).</li>
+<li><strong>targets</strong> is a pipeline tool: it works out the dependencies between all steps of a project itself, and only re-runs the steps whose inputs changed. Caching (next section) does the same for single chunks of one document.</li>
+<li><strong>renv</strong> records the exact package versions of a project in a lockfile, so others (or you, in two years) can restore them.</li>
+<li><strong>Docker</strong> freezes the whole system (OS, R, packages) into an image.</li>
+</ul>
+</section>
+<section id="caching-only-re-run-what-changed" class="level2">
+<h2 class="anchored" data-anchor-id="caching-only-re-run-what-changed">Caching: only re-run what changed</h2>
+<p>A report rerenders <em>every</em> chunk <em>every</em> time. That’s what makes it reproducible, and what makes it slow once a step takes minutes (a download, a big file, a model). Three tools, from coarse to fine:</p>
+<section id="freeze-skip-whole-documents" class="level3">
+<h3 class="anchored" data-anchor-id="freeze-skip-whole-documents"><code>freeze</code>: skip whole documents</h3>
+<p>In <code>_quarto.yml</code>, <code>freeze: auto</code> re-runs a document’s code only when its <code>.qmd</code> changed. Results are stored in <code>_freeze/</code>. Useful in projects with many documents.</p>
+</section>
+<section id="cache-true-skip-single-chunks" class="level3">
+<h3 class="anchored" data-anchor-id="cache-true-skip-single-chunks"><code>cache: true</code>: skip single chunks</h3>
+<p>A cached chunk stores its results in <code>report_cache/</code>, and is re-run only when its <em>code</em> changes. The chunk below takes three seconds the first time, and none at all after that:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.sleep</span>(<span class="dv">3</span>) <span class="co"># stand-in for a slow step</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>weather <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/weather_karlsruhe.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr cell-output-message">
+<pre><code>Rows: 54453 Columns: 10
+── Column specification ────────────────────────────────────────────────────────────────────────────────────────────────
+Delimiter: ","
+chr  (2): station, season
+dbl  (7): temp_mean, temp_max, temp_min, precip, sunshine, snow, month
+date (1): date
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>weather <span class="sc">|&gt;</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">days =</span> <span class="fu">n</span>())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="tibble-view anchored" id="tbl-view-667113686">
+  <button type="button" class="view-btn" aria-expanded="false">▦ Table view</button>
+  <pre class="tibble-console is-open"><code># A tibble: 1 × 1
+   days
+  &lt;int&gt;
+1 54453</code></pre>
+  <div class="tibble-table">
+    <div class="datatables html-widget html-fill-item" id="htmlwidget-276cbadc3ea53ef23428" style="width:100%;height:auto;"></div>
+    <script type="application/json" data-for="htmlwidget-276cbadc3ea53ef23428">{"x":{"filter":"none","vertical":false,"data":[["1"],[54453]],"container":"<table class=\"table table-sm table-striped table-hover\">\n  <thead>\n    <tr>\n      <th>#<\/th>\n      <th>days<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"language":{"search":"","searchPlaceholder":"Search"},"columnDefs":[{"orderable":true,"width":"1%","targets":0},{"className":"dt-right","targets":1},{"name":" ","targets":0},{"name":"days","targets":1}],"order":[[0,"asc"]],"autoWidth":false,"orderClasses":false},"callback":"function(table) {\nvar clicks = {};\n$(table.table().header()).on('click', 'th', function () {\n  var idx = table.column($(this)).index();\n  if (idx === 0) return;\n  clicks[idx] = ((clicks[idx] || 0) + 1) % 3;\n  if (clicks[idx] === 0) {\n    setTimeout(function () { table.order([[0, 'asc']]).draw(); }, 0);\n  }\n});\n}"},"evals":["callback"],"jsHooks":[]}</script>
+  </div>
+</div>
+</div>
+</div>
+</section>
+<section id="declaring-dependencies" class="level3">
+<h3 class="anchored" data-anchor-id="declaring-dependencies">Declaring dependencies</h3>
+<p>The pitfall: the cache only watches the chunk’s <em>code</em>. If the data <em>file</em> changes, the old result is reused without notice. <code>cache.extra</code> adds anything else the result depends on, e.g. the file’s modification time:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: load-data</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co">#| cache: true</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="co">#| cache.extra: !expr file.mtime("data/weather_karlsruhe.csv")</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>yearly <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/weather_karlsruhe.csv"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  ...</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>dependson: "load-data"</code> does the same for a chunk that uses the results of another cached chunk.</p>
+</section>
+</section>
+<section id="random-numbers-and-seeds" class="level2">
+<h2 class="anchored" data-anchor-id="random-numbers-and-seeds">Random numbers and seeds</h2>
+<p>Simulations, bootstrapping and random samples all draw random numbers, and every run draws different ones. <code>rnorm()</code> draws from a normal distribution, <code>runif()</code> from a uniform one; run this chunk twice and the numbers change:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rnorm</span>(<span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  0.1896666  0.0443924 -0.7566665</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">runif</span>(<span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.3659005 0.7067026 0.2986343</code></pre>
+</div>
+</div>
+<p>A report would then show different numbers after every render. <code>set.seed()</code> fixes the starting point of the random number generator: the same seed gives the same draws.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2026</span>)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">runif</span>(<span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.6986735 0.5565305 0.1401400</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2026</span>)</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">runif</span>(<span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.6986735 0.5565305 0.1401400</code></pre>
+</div>
+</div>
+<p>In a report, call <code>set.seed()</code> once, at the top of the setup chunk. Every render then draws the same numbers, as long as the random steps run in the same order.</p>
+<section id="sampling-rows-from-a-tibble" class="level3">
+<h3 class="anchored" data-anchor-id="sampling-rows-from-a-tibble">Sampling rows from a tibble</h3>
+<p><code>slice_sample()</code> draws random rows: a number of rows with <code>n</code>, a share with <code>prop</code>, and per group with <code>by</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>weather <span class="sc">|&gt;</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_sample</span>(<span class="at">n =</span> <span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="tibble-view anchored" id="tbl-view-347013509">
+  <button type="button" class="view-btn" aria-expanded="false">▦ Table view</button>
+  <pre class="tibble-console is-open"><code># A tibble: 3 × 10
+  date       station   temp_mean temp_max temp_min precip sunshine  snow month season
+  &lt;date&gt;     &lt;chr&gt;         &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt; 
+1 1976-07-25 Karlsruhe      16.2     22.7     12.4    0.4      6.2     0     7 Summer
+2 1960-07-27 Karlsruhe      16       20.4     15.1   12.5      1.3     0     7 Summer
+3 1921-04-22 Karlsruhe       6.9     11.7      4.3    0       NA      NA     4 Spring</code></pre>
+  <div class="tibble-table">
+    <div class="datatables html-widget html-fill-item" id="htmlwidget-eb89b5917d21dc640b37" style="width:100%;height:auto;"></div>
+    <script type="application/json" data-for="htmlwidget-eb89b5917d21dc640b37">{"x":{"filter":"none","vertical":false,"data":[["1","2","3"],["1976-07-25","1960-07-27","1921-04-22"],["Karlsruhe","Karlsruhe","Karlsruhe"],[16.2,16,6.9],[22.7,20.4,11.7],[12.4,15.1,4.3],[0.4,12.5,0],[6.2,1.3,null],[0,0,null],[7,7,4],["Summer","Summer","Spring"]],"container":"<table class=\"table table-sm table-striped table-hover\">\n  <thead>\n    <tr>\n      <th>#<\/th>\n      <th>date<\/th>\n      <th>station<\/th>\n      <th>temp_mean<\/th>\n      <th>temp_max<\/th>\n      <th>temp_min<\/th>\n      <th>precip<\/th>\n      <th>sunshine<\/th>\n      <th>snow<\/th>\n      <th>month<\/th>\n      <th>season<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"language":{"search":"","searchPlaceholder":"Search"},"columnDefs":[{"orderable":true,"width":"1%","targets":0},{"className":"dt-right","targets":[3,4,5,6,7,8,9]},{"name":" ","targets":0},{"name":"date","targets":1},{"name":"station","targets":2},{"name":"temp_mean","targets":3},{"name":"temp_max","targets":4},{"name":"temp_min","targets":5},{"name":"precip","targets":6},{"name":"sunshine","targets":7},{"name":"snow","targets":8},{"name":"month","targets":9},{"name":"season","targets":10}],"order":[[0,"asc"]],"autoWidth":false,"orderClasses":false},"callback":"function(table) {\nvar clicks = {};\n$(table.table().header()).on('click', 'th', function () {\n  var idx = table.column($(this)).index();\n  if (idx === 0) return;\n  clicks[idx] = ((clicks[idx] || 0) + 1) % 3;\n  if (clicks[idx] === 0) {\n    setTimeout(function () { table.order([[0, 'asc']]).draw(); }, 0);\n  }\n});\n}"},"evals":["callback"],"jsHooks":[]}</script>
+  </div>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>weather <span class="sc">|&gt;</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_sample</span>(<span class="at">n =</span> <span class="dv">2</span>, <span class="at">by =</span> season)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="tibble-view anchored" id="tbl-view-393238508">
+  <button type="button" class="view-btn" aria-expanded="false">▦ Table view</button>
+  <pre class="tibble-console is-open"><code># A tibble: 8 × 10
+  date       station      temp_mean temp_max temp_min precip sunshine  snow month season
+  &lt;date&gt;     &lt;chr&gt;            &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt; 
+1 2016-01-31 Rheinstetten       7.6     13        5.2    3.2      0       0     1 Winter
+2 1948-02-20 Karlsruhe         -7.2     -4      -11      0.3      4       0     2 Winter
+3 1986-04-23 Karlsruhe          9.1     11.8      5      2.4      0.2     0     4 Spring
+4 1953-03-08 Karlsruhe          1        8.4     -3.3    0        9       0     3 Spring
+5 1908-06-19 Karlsruhe         23.9     29       18.9    0       NA      NA     6 Summer
+6 1876-08-18 Karlsruhe         22.2     28.2     16.6    0       NA      NA     8 Summer
+7 1924-11-16 Karlsruhe         -1.4      1.6     -2.5    0       NA      NA    11 Autumn
+8 1888-10-12 Karlsruhe          9.4     13.3      6.5    9.5     NA      NA    10 Autumn</code></pre>
+  <div class="tibble-table">
+    <div class="datatables html-widget html-fill-item" id="htmlwidget-f141acfbdcbc68eb84c8" style="width:100%;height:auto;"></div>
+    <script type="application/json" data-for="htmlwidget-f141acfbdcbc68eb84c8">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8"],["2016-01-31","1948-02-20","1986-04-23","1953-03-08","1908-06-19","1876-08-18","1924-11-16","1888-10-12"],["Rheinstetten","Karlsruhe","Karlsruhe","Karlsruhe","Karlsruhe","Karlsruhe","Karlsruhe","Karlsruhe"],[7.6,-7.2,9.1,1,23.9,22.2,-1.4,9.4],[13,-4,11.8,8.4,29,28.2,1.6,13.3],[5.2,-11,5,-3.3,18.9,16.6,-2.5,6.5],[3.2,0.3,2.4,0,0,0,0,9.5],[0,4,0.2,9,null,null,null,null],[0,0,0,0,null,null,null,null],[1,2,4,3,6,8,11,10],["Winter","Winter","Spring","Spring","Summer","Summer","Autumn","Autumn"]],"container":"<table class=\"table table-sm table-striped table-hover\">\n  <thead>\n    <tr>\n      <th>#<\/th>\n      <th>date<\/th>\n      <th>station<\/th>\n      <th>temp_mean<\/th>\n      <th>temp_max<\/th>\n      <th>temp_min<\/th>\n      <th>precip<\/th>\n      <th>sunshine<\/th>\n      <th>snow<\/th>\n      <th>month<\/th>\n      <th>season<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"language":{"search":"","searchPlaceholder":"Search"},"columnDefs":[{"orderable":true,"width":"1%","targets":0},{"className":"dt-right","targets":[3,4,5,6,7,8,9]},{"name":" ","targets":0},{"name":"date","targets":1},{"name":"station","targets":2},{"name":"temp_mean","targets":3},{"name":"temp_max","targets":4},{"name":"temp_min","targets":5},{"name":"precip","targets":6},{"name":"sunshine","targets":7},{"name":"snow","targets":8},{"name":"month","targets":9},{"name":"season","targets":10}],"order":[[0,"asc"]],"autoWidth":false,"orderClasses":false},"callback":"function(table) {\nvar clicks = {};\n$(table.table().header()).on('click', 'th', function () {\n  var idx = table.column($(this)).index();\n  if (idx === 0) return;\n  clicks[idx] = ((clicks[idx] || 0) + 1) % 3;\n  if (clicks[idx] === 0) {\n    setTimeout(function () { table.order([[0, 'asc']]).draw(); }, 0);\n  }\n});\n}"},"evals":["callback"],"jsHooks":[]}</script>
+  </div>
+</div>
+</div>
+</div>
+<p>With <code>replace = TRUE</code>, a row can be drawn more than once. As many rows as the data has, drawn with replacement, make a bootstrap sample, the basis of resampling methods:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>weather <span class="sc">|&gt;</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_sample</span>(<span class="at">prop =</span> <span class="dv">1</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">temp_mean =</span> <span class="fu">mean</span>(temp_mean, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="tibble-view anchored" id="tbl-view-968264726">
+  <button type="button" class="view-btn" aria-expanded="false">▦ Table view</button>
+  <pre class="tibble-console is-open"><code># A tibble: 1 × 1
+  temp_mean
+      &lt;dbl&gt;
+1      10.4</code></pre>
+  <div class="tibble-table">
+    <div class="datatables html-widget html-fill-item" id="htmlwidget-44ea9c433f5e108788be" style="width:100%;height:auto;"></div>
+    <script type="application/json" data-for="htmlwidget-44ea9c433f5e108788be">{"x":{"filter":"none","vertical":false,"data":[["1"],[10.43019117404]],"container":"<table class=\"table table-sm table-striped table-hover\">\n  <thead>\n    <tr>\n      <th>#<\/th>\n      <th>temp_mean<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"language":{"search":"","searchPlaceholder":"Search"},"columnDefs":[{"orderable":true,"width":"1%","targets":0},{"className":"dt-right","targets":1},{"name":" ","targets":0},{"name":"temp_mean","targets":1}],"order":[[0,"asc"]],"autoWidth":false,"orderClasses":false},"callback":"function(table) {\nvar clicks = {};\n$(table.table().header()).on('click', 'th', function () {\n  var idx = table.column($(this)).index();\n  if (idx === 0) return;\n  clicks[idx] = ((clicks[idx] || 0) + 1) % 3;\n  if (clicks[idx] === 0) {\n    setTimeout(function () { table.order([[0, 'asc']]).draw(); }, 0);\n  }\n});\n}"},"evals":["callback"],"jsHooks":[]}</script>
+  </div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="try-it-your-own-report" class="level2">
+<h2 class="anchored" data-anchor-id="try-it-your-own-report">Try it: your own report</h2>
+<p><strong>Your task:</strong> create a folder <code>c03/my_report/</code> with a <code>_quarto.yml</code> and one <code>.qmd</code>, rendering to HTML and Typst PDF. The report should answer one question about the weather data (e.g.&nbsp;“Is it getting sunnier?”, “Do we get less snow?”) with at least one numbered figure, one table, one inline number, one citation, and a cached data-loading chunk. Refer to the figure and the table in the text.</p>
+<p>The <code>c03/report/</code> example is a solution to a similar task.</p>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<script type="application/json" id="clickrun-authors-github">[{"github":"jfsalzmann","name":"Johann-Friedrich Salzmann"}]</script>
+
+
+
+
+</body></html>
