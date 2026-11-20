@@ -7,3 +7,6 @@
 **/*.quarto_ipynb
 
 /.luarc.json
+
+# Simulated ~1 GB dataset, created by data/make_big_data.R
+data/big/

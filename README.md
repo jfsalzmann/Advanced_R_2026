@@ -25,7 +25,8 @@ module pages (HTML and PDF) and the slides follow after the course.
 
 ```r
 if (!require(pacman)) install.packages("pacman")
-p_load(tidyverse, magrittr, scales, patchwork, plotly, quarto, shiny, bslib)
+p_load(tidyverse, magrittr, broom, duckplyr, duckdb, dbplyr, scales, patchwork, plotly, quarto,
+       tinytable, shiny, bslib)
 ```
 
 ## Data

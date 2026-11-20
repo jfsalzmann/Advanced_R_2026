@@ -60,7 +60,8 @@ server <- function(input, output) {
       ) |>
       select(year, season, value = all_of(input$measure)) |>
       group_by(year, season) |>
-      summarize(value = mean(value, na.rm = TRUE), .groups = "drop")
+      summarize(value = mean(value, na.rm = TRUE)) |>
+      ungroup()
   })
 
   output$trend_plot <- renderPlot({

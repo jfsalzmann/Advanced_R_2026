@@ -9,7 +9,7 @@
 # p_load() installs missing packages, then loads them
 
 if (!require(pacman)) install.packages("pacman")
-p_load(tidyverse, magrittr)
+p_load(tidyverse, magrittr, broom)
 
 tidyverse_packages()
 
@@ -44,7 +44,24 @@ rheinstetten_raw %<>% filter(!is.na(TMK))
 
 
 # ============================================================
-# 4. CLEANING: ONE PIPELINE ----
+# 4. DPLYR VERBS AND SQL ----
+# ============================================================
+# SELECT a, b             select(a, b)
+# SELECT a AS new         rename(new = a), or select(new = a)
+# SELECT a * 2 AS b       mutate(b = a * 2)
+# SELECT DISTINCT a       distinct(a)
+# WHERE a > 0             filter(a > 0)
+# ORDER BY a DESC         arrange(desc(a))
+# GROUP BY g              group_by(g)
+# AVG(a), COUNT(*)        summarize(mean(a), n())
+# HAVING n > 10           filter() after summarize()
+# LIMIT 10                slice_head(n = 10)
+# LEFT JOIN ... ON ...    left_join(by = ...)
+# UNION ALL               bind_rows()
+
+
+# ============================================================
+# 5. CLEANING: ONE PIPELINE ----
 # ============================================================
 # readable names, a real date, only the columns we need
 
@@ -93,9 +110,17 @@ karlsruhe |>
   filter(!is.na(sunshine)) |>
   summarize(first_sunshine = min(date))
 
+# across(): one function, many columns ----
+
+karlsruhe |>
+  summarize(across(where(is.numeric), \(x) mean(x, na.rm = TRUE)))
+
+karlsruhe |>
+  mutate(across(starts_with("temp_"), round))
+
 
 # ============================================================
-# 5. COMBINING DATA: BIND_ROWS() AND JOINS ----
+# 6. COMBINING DATA: BIND_ROWS() AND JOINS ----
 # ============================================================
 # Karlsruhe until 2008, Rheinstetten afterwards; joins compare and enrich
 
@@ -147,7 +172,7 @@ weather
 
 
 # ============================================================
-# 6. AGGREGATION: GROUP_BY(), MUTATE(), SUMMARIZE() ----
+# 7. AGGREGATION: GROUP_BY(), MUTATE(), SUMMARIZE() ----
 # ============================================================
 # summarize() collapses rows, mutate() keeps them, group_by() makes both per group
 
@@ -189,12 +214,35 @@ weather |>
 
 
 # ============================================================
-# 7. RESHAPING: PIVOT_LONGER() AND PIVOT_WIDER() ----
+# 8. SEVERAL ROWS PER GROUP: REFRAME() ----
+# ============================================================
+# summarize() returns one row per group, reframe() any number (and ungroups)
+
+weather |>
+  group_by(station) |>
+  reframe(date = range(date))
+
+# several values per group give several rows
+probs <- c(0.1, 0.5, 0.9)
+
+weather |>
+  group_by(season) |>
+  reframe(
+    prob = probs,
+    temp = quantile(temp_mean, probs, na.rm = TRUE)
+  )
+
+
+# ============================================================
+# 9. RESHAPING: PIVOT_LONGER() AND PIVOT_WIDER() ----
 # ============================================================
 # long: one row per observation and measure; wide: one column per group
 
-temps_long <- weather |>
-  select(date, temp_min, temp_mean, temp_max) |>
+temps_wide <- weather |>
+  select(date, temp_min, temp_mean, temp_max)
+temps_wide
+
+temps_long <- temps_wide |>
   pivot_longer(
     starts_with("temp_"),
     names_to = "measure",
@@ -203,16 +251,20 @@ temps_long <- weather |>
   )
 temps_long
 
-weather |>
+season_means <- weather |>
   mutate(year = year(date)) |>
   filter(year >= 2016, year <= 2025) |>
   group_by(year, season) |>
-  summarize(temp_mean = mean(temp_mean, na.rm = TRUE), .groups = "drop") |>
+  summarize(temp_mean = mean(temp_mean, na.rm = TRUE)) |>
+  ungroup()
+season_means
+
+season_means |>
   pivot_wider(names_from = season, values_from = temp_mean)
 
 
 # ============================================================
-# 8. SAVING THE CLEANED DATA ----
+# 10. SAVING THE CLEANED DATA ----
 # ============================================================
 # c02-c04 start from this file
 
@@ -221,9 +273,9 @@ weather |>
 
 
 # ============================================================
-# 9. R PROGRAMMING IN A NUTSHELL ----
+# 11. R PROGRAMMING IN A NUTSHELL ----
 # ============================================================
-# operators, functions, conditions and loops, the tidyverse way
+# operators, functions, conditions, rowwise() instead of loops, nesting
 
 # Logical operators ----
 
@@ -244,6 +296,15 @@ celsius_to_fahrenheit(30, digits = 3)
 weather |>
   mutate(temp_max_f = celsius_to_fahrenheit(temp_max)) |>
   select(date, temp_max, temp_max_f)
+
+# Custom operators ----
+
+# a custom infix operator: a name between % signs, in backticks
+`%+-%` <- function(value, margin) {
+  c(value - margin, value + margin)
+}
+
+20 %+-% 2.5
 
 # Anonymous functions ----
 
@@ -278,24 +339,41 @@ yearly |>
 
 # Loops and their alternatives ----
 
-for (station_name in c("Karlsruhe", "Rheinstetten")) {
+# pluck(): one column as a plain vector
+stations <- weather |>
+  distinct(station) |>
+  pluck("station")
+
+season_names <- seasons |>
+  distinct(season) |>
+  pluck("season")
+
+stations
+season_names
+
+for (station_name in stations) {
   n_days <- weather |>
     filter(station == station_name) |>
     nrow()
   print(str_glue("{station_name}: {n_days} days"))
 }
 
+for (station_name in stations) {
+  for (season_name in season_names) {
+    print(str_glue("{station_name} in {season_name}"))
+  }
+}
+
 weather |>
   count(station)
 
-c("Karlsruhe", "Rheinstetten") |>
-  map_int(\(s) nrow(filter(weather, station == s)))
-
 expand_grid(
-  station = c("Karlsruhe", "Rheinstetten"),
-  season = c("Winter", "Spring", "Summer", "Autumn")
+  station = stations,
+  season = season_names
 ) |>
   mutate(label = str_glue("{station} in {season}"))
+
+# rowwise() ----
 
 classify_anomaly <- function(anomaly) {
   if (anomaly > 0)
@@ -303,15 +381,142 @@ classify_anomaly <- function(anomaly) {
     "colder"
 }
 
+classify_anomaly(0.8)
+
+# fails: if() only takes a single value
+# yearly |>
+#   mutate(sign = classify_anomaly(anomaly))
+
 yearly |>
   rowwise() |>
   mutate(sign = classify_anomaly(anomaly)) |>
   ungroup() |>
   select(year, anomaly, sign)
 
+# purrr's map_*(): the same on a vector
+c(0.8, -0.3) |>
+  map_chr(classify_anomaly)
+
+# expand_grid() sets up the combinations, rowwise() calls a function once per row
+feels_like <- function(temp, wind) {
+  if (temp > 10)
+    temp else
+    13.12 + 0.6215 * temp - 11.37 * wind^0.16 + 0.3965 * temp * wind^0.16
+}
+
+conditions <- expand_grid(
+  temp = c(-10, 0, 10, 20),
+  wind = c(10, 30, 50)
+)
+
+conditions |>
+  rowwise() |>
+  mutate(feels = round(feels_like(temp, wind), 1)) |>
+  ungroup()
+
+# the same in parallel with multidplyr: load packages and copy the function to the sessions first
+p_load(multidplyr)
+
+cluster <- new_cluster(2)
+cluster |>
+  cluster_library("tidyverse") |>
+  cluster_copy("feels_like")
+
+conditions |>
+  rowwise() |>
+  partition(cluster) |>
+  mutate(feels = round(feels_like(temp, wind), 1)) |>
+  collect() |>
+  arrange(temp, wind)
+
+# Nesting: one model per group ----
+
+season_years <- weather |>
+  mutate(year = year(date)) |>
+  filter(year >= 1950, year <= 2025) |>
+  group_by(season, year) |>
+  summarize(temp_mean = mean(temp_mean, na.rm = TRUE)) |>
+  ungroup()
+season_years
+
+season_data <- season_years |>
+  nest(data = c(year, temp_mean))
+season_data
+
+season_models <- season_data |>
+  rowwise() |>
+  mutate(model = list(lm(temp_mean ~ year, data = data)))
+season_models
+
+# tidy() each model, unnest() to one long tibble
+season_coefficients <- season_models |>
+  mutate(coefficients = list(tidy(model))) |>
+  ungroup() |>
+  select(season, coefficients)
+season_coefficients
+
+season_coefficients |>
+  unnest(coefficients) |>
+  filter(term == "year") |>
+  mutate(per_decade = estimate * 10)
+
 
 # ============================================================
-# 10. TRY IT: THE SUNNIEST AND RAINIEST DECADES ----
+# 12. BIGGER DATA: DUCKDB AND DUCKPLYR ----
+# ============================================================
+# run make_big_data.R once (1 GB, ~1 min); elapsed = seconds
+
+source("data/make_big_data.R")
+
+big_file <- "data/big/weather_big.csv"
+
+# in memory: read everything, then compute
+read_csv(big_file) |>
+  filter(year >= 1996) |>
+  summarize(hot_days = sum(temp_max >= 30, na.rm = TRUE), .by = station) |>
+  arrange(desc(hot_days)) |>
+  system.time()
+
+# DuckDB: only records the steps, collect() runs the whole query
+p_load(duckplyr)
+
+read_csv_duckdb(big_file) |>
+  filter(year >= 1996) |>
+  summarize(hot_days = sum(temp_max >= 30, na.rm = TRUE), .by = station) |>
+  arrange(desc(hot_days)) |>
+  collect() |>
+  system.time()
+
+hot_days_big <- read_csv_duckdb(big_file) |>
+  filter(year >= 1996) |>
+  summarize(hot_days = sum(temp_max >= 30, na.rm = TRUE), .by = station) |>
+  arrange(desc(hot_days)) |>
+  collect()
+hot_days_big
+
+# copy the CSV into a DuckDB database file once, then query the table
+p_load(duckdb, dbplyr)
+
+con <- dbConnect(duckdb(), "data/big/weather_big.duckdb")
+
+dbExecute(
+  con,
+  "CREATE OR REPLACE TABLE weather AS SELECT * FROM read_csv('data/big/weather_big.csv')"
+) |>
+  system.time()
+
+tbl(con, "weather") |>
+  filter(year >= 1996) |>
+  summarize(hot_days = sum(temp_max >= 30, na.rm = TRUE), .by = station) |>
+  arrange(desc(hot_days)) |>
+  collect() |>
+  system.time()
+
+dbDisconnect(con)
+
+
+# ============================================================
+# 13. TRY IT: THE SUNNIEST AND RAINIEST DECADES ----
 # ============================================================
 
 # Your task: starting from weather, compute the average yearly sunshine hours and
@@ -319,9 +524,26 @@ yearly |>
 
 
 # ============================================================
-# 11. TRY IT: SUMMER DAYS PER SEASON AND STATION ----
+# 14. TRY IT: SUMMER DAYS PER SEASON AND STATION ----
 # ============================================================
 
 # Your task: count the days with at least 25 °C maximum temperature (a "Sommertag", summer
 # day) per season, separately for both stations during their 1948–1985 overlap. Show one row
 # per season and one column per station.
+
+
+# ============================================================
+# 15. TRY IT: SEASONAL QUANTILES OF THE EXTREMES ----
+# ============================================================
+
+# Your task: for each season, compute the 5%, 50% and 95% quantiles of both the daily
+# minimum and the daily maximum temperature, with one row per season and quantile.
+
+
+# ============================================================
+# 16. TRY IT: HAS THE WARMING SPED UP? ----
+# ============================================================
+
+# Your task: for each season, compute the warming trend in °C per decade twice, once for the
+# years 1950–2025 and once for 1990–2025. Label each trend as "fast" (more than 0.3 °C per
+# decade), "slow" (above 0) or "none".

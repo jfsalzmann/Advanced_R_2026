@@ -2,9 +2,19 @@
 # Run from the project root: shiny::runApp("c04/app_two_files")
 
 if (!require(pacman)) install.packages("pacman")
-p_load(tidyverse, shiny, bslib)
+p_load(tidyverse, shiny, bslib, plotly)
 
 weather <- read_csv("weather_karlsruhe.csv", show_col_types = FALSE)
+
+yearly <- weather |>
+  mutate(year = year(date)) |>
+  group_by(year) |>
+  summarize(
+    temp_mean = mean(temp_mean, na.rm = TRUE),
+    n_days = n()
+  ) |>
+  ungroup() |>
+  filter(n_days >= 360)
 
 measures <- c(
   "Mean temperature (°C)" = "temp_mean",

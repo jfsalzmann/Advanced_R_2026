@@ -42,11 +42,35 @@ runApp("c04/app_two_files")
 # ============================================================
 # every input: an ID (input$ID in the server), a label, the choices or range
 
-selectInput("measure", "Measure", choices = c("Mean" = "temp_mean", "Max" = "temp_max"))
-sliderInput("years", "Years", min = 1876, max = 2025, value = c(1950, 2025), sep = "")
-checkboxGroupInput("seasons", "Seasons", choices = c("Winter", "Spring", "Summer", "Autumn"))
-checkboxInput("smooth", "Show trend", value = TRUE)
-dateRangeInput("dates", "Period", start = "2025-01-01", end = "2025-12-31")
+selectInput(
+  "measure",
+  "Measure",
+  choices = c("Mean" = "temp_mean", "Max" = "temp_max")
+)
+sliderInput(
+  "years",
+  "Years",
+  min = 1876,
+  max = 2025,
+  value = c(1950, 2025),
+  sep = ""
+)
+checkboxGroupInput(
+  "seasons",
+  "Seasons",
+  choices = c("Winter", "Spring", "Summer", "Autumn")
+)
+checkboxInput(
+  "smooth",
+  "Show trend",
+  value = TRUE
+)
+dateRangeInput(
+  "dates",
+  "Period",
+  start = "2025-01-01",
+  end = "2025-12-31"
+)
 
 # outputs: plotOutput(), tableOutput(), textOutput(), plotlyOutput()
 # layout with bslib: a sidebar for the controls, cards for the outputs
@@ -92,7 +116,8 @@ ui <- page_sidebar(
 #     ) |>
 #     select(year, season, value = all_of(input$measure)) |>
 #     group_by(year, season) |>
-#     summarize(value = mean(value, na.rm = TRUE), .groups = "drop")
+#     summarize(value = mean(value, na.rm = TRUE)) |>
+#     ungroup()
 # })
 #
 # output$trend_plot <- renderPlot({
@@ -111,8 +136,8 @@ ui <- page_sidebar(
 # ============================================================
 # 5. DEPLOYING AN APP ----
 # ============================================================
-# Posit Connect Cloud / shinyapps.io: everything the app reads must live inside its folder
-# Shinylive: runs in the browser, static hosting; own server: Shiny Server, Docker
+# Posit Connect Cloud (connect.posit.cloud) / shinyapps.io (www.shinyapps.io): everything the app reads must live inside its folder
+# Shinylive (posit-dev.github.io/r-shinylive): runs in the browser, static hosting; own server: Shiny Server, Docker
 
 rsconnect::deployApp("c04/app")
 
@@ -134,4 +159,4 @@ rsconnect::deployApp("c04/app")
 
 # Your task: build a new one-file app for a question of your choice, e.g. "How many hot days
 # did each year have?" with a bar chart and a slider for the threshold temperature (25, 30
-# or 35 °C), or the warming stripes from c02 with a selectable reference period.
+# or 35 °C), or a heatmap of monthly means (months × years) with a selectable measure.

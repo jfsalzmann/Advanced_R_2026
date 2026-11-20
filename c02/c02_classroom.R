@@ -94,7 +94,8 @@ seasonal <- weather |>
   mutate(year = year(date)) |>
   filter(year >= 1900, year <= 2025) |>
   group_by(year, season) |>
-  summarize(temp_mean = mean(temp_mean, na.rm = TRUE), .groups = "drop")
+  summarize(temp_mean = mean(temp_mean, na.rm = TRUE)) |>
+  ungroup()
 
 seasonal |>
   ggplot(aes(x = year, y = temp_mean, color = season)) +
