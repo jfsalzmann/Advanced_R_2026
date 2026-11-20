@@ -1,0 +1,19 @@
+project:
+  title: "Is Karlsruhe getting sunnier?"
+
+execute:
+  echo: false
+  warning: false
+  message: false
+
+format:
+  html:
+    toc: true
+    number-sections: true
+    embed-resources: true
+  typst:
+    toc: true
+    number-sections: true
+    papersize: a4
+
+bibliography: references.bib

@@ -1,0 +1,126 @@
+---
+title: "Is Karlsruhe Getting Sunnier?"
+subtitle: "Annual sunshine hours since the 1930s"
+author: "Solution to the c03 Try-it"
+date: today
+---
+
+```{r}
+#| label: setup
+if (!require(pacman)) install.packages("pacman")
+p_load(tidyverse, tinytable)
+```
+
+```{r}
+#| label: load-data
+#| cache: true
+#| cache.extra: !expr file.mtime("data/weather_karlsruhe.csv")
+sunshine_yearly <- read_csv("data/weather_karlsruhe.csv") |>
+  mutate(year = year(date)) |>
+  group_by(year) |>
+  summarize(
+    days_measured = sum(!is.na(sunshine)),
+    sunshine = sum(sunshine, na.rm = TRUE),
+    station = last(station)
+  ) |>
+  ungroup() |>
+  filter(days_measured >= 360)
+```
+
+```{r}
+#| label: key-numbers
+sunshine_periods <- sunshine_yearly |>
+  mutate(
+    period = case_when(
+      year %in% 1961:1990 ~ "reference",
+      year %in% 1996:2025 ~ "recent"
+    )
+  ) |>
+  filter(!is.na(period)) |>
+  group_by(period) |>
+  summarize(sunshine = mean(sunshine)) |>
+  ungroup() |>
+  pivot_wider(names_from = period, values_from = sunshine)
+
+sunshine_reference <- sunshine_periods |>
+  pull(reference) |>
+  round()
+
+sunshine_gain <- sunshine_periods |>
+  mutate(gain = recent - reference) |>
+  pull(gain) |>
+  round()
+
+first_year <- sunshine_yearly |>
+  summarize(start = min(year)) |>
+  pull(start)
+```
+
+## Question and data
+
+Sunshine matters for agriculture, solar power and health, and it isn't constant: across Europe,
+sunshine at the surface fell from the 1950s to the 1980s and has risen since, a pattern known as
+"dimming" and "brightening" [@wild2009]. Does Karlsruhe show it too?
+
+The data are daily sunshine hours from the Deutscher Wetterdienst [@dwd2026], from the
+Karlsruhe station until 2008 and from Rheinstetten since, analysed with the tidyverse
+[@wickham2023]. Sunshine was measured from `r first_year` on. We only keep years with at least
+360 measured days.
+
+## Results
+
+@fig-sunshine shows the annual sunshine hours. After a dip to the 1970s, the trend points
+clearly upwards: in 1996–2025, Karlsruhe had `r sunshine_gain` more hours of sunshine per year
+than in the reference period 1961–1990 (`r sunshine_reference` hours).
+
+```{r}
+#| label: fig-sunshine
+#| fig-cap: "Annual sunshine hours, with a smoothed trend."
+sunshine_yearly |>
+  ggplot(aes(x = year, y = sunshine)) +
+  geom_col(aes(fill = station)) +
+  geom_smooth(method = "loess", formula = y ~ x, se = FALSE, color = "black") +
+  scale_fill_manual(values = c(Karlsruhe = "#F1C232", Rheinstetten = "#E69138")) +
+  coord_cartesian(ylim = c(1200, NA)) +
+  labs(
+    x = NULL,
+    y = "Sunshine (hours per year)",
+    fill = NULL
+  ) +
+  theme_minimal() +
+  theme(legend.position = "bottom")
+```
+
+@tbl-decades gives the averages per decade.
+
+```{r}
+#| label: tbl-decades
+#| tbl-cap: "Average annual sunshine hours per decade (complete years only)."
+sunshine_yearly |>
+  mutate(decade = str_c(year %/% 10 * 10, "s")) |>
+  group_by(decade) |>
+  summarize(
+    sunshine = mean(sunshine),
+    years = n()
+  ) |>
+  ungroup() |>
+  rename(
+    Decade = decade,
+    `Sunshine (hours)` = sunshine,
+    Years = years
+  ) |>
+  tt() |>
+  format_tt(digits = 0, num_fmt = "decimal")
+```
+
+## Conclusion
+
+Yes: Karlsruhe has been getting sunnier since the 1980s, after a darker period in the 1960s and
+1970s, in line with the European dimming and brightening. One caveat: the series switches from
+the Karlsruhe to the Rheinstetten station in 2008, so part of a difference across that year
+could come from the change of location.
+
+## References {.unnumbered}
+
+::: {#refs}
+:::
